@@ -1,15 +1,15 @@
 ---
-title: "First"
+title: "A test post"
 author: "kelo"
 date: 2020-10-30T14:28:50+08:00
 description: "test"
 tags: [
-    "markdown",
-    "test",
+    "tags test1",
+    "tags test2",
 ] 
 categories: [
-    "theme",
-    "syntax"
+    "categories test1",
+    "categories test2"
 ]
 draft: false
 ---
