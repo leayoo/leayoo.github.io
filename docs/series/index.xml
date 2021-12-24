@@ -11,11 +11,11 @@
     
     
     <item>
-      <title>使用hugo新建,上传文章</title>
-      <link>https://kelo7.github.io/2021/12/%E4%BD%BF%E7%94%A8hugo%E6%96%B0%E5%BB%BA%E4%B8%8A%E4%BC%A0%E6%96%87%E7%AB%A0/</link>
+      <title>使用hugo</title>
+      <link>https://kelo7.github.io/2021/12/%E4%BD%BF%E7%94%A8hugo/</link>
       <pubDate>Tue, 21 Dec 2021 11:47:47 +0800</pubDate>
       
-      <guid>https://kelo7.github.io/2021/12/%E4%BD%BF%E7%94%A8hugo%E6%96%B0%E5%BB%BA%E4%B8%8A%E4%BC%A0%E6%96%87%E7%AB%A0/</guid>
+      <guid>https://kelo7.github.io/2021/12/%E4%BD%BF%E7%94%A8hugo/</guid>
       <description>hugo使用 不经常用hugo，导致每次使用都要重新翻找教程，干脆把要用的操作写下来备份 创建新文章： hugo new posts/my-first-post.md 这里面值得注意的是，通过上述命令行创</description>
     </item>
     
@@ -29,7 +29,7 @@
     </item>
     
     <item>
-      <title>First</title>
+      <title>A test post</title>
       <link>https://kelo7.github.io/2020/10/first/</link>
       <pubDate>Fri, 30 Oct 2020 14:28:50 +0800</pubDate>
       

@@ -1,52 +1,14 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>markdown on Pure theme for Hugo</title>
-    <link>https://kelo7.github.io/tags/markdown/</link>
-    <description>Recent content in markdown on Pure theme for Hugo</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <copyright>CC BY 4.0 CN</copyright>
-    <lastBuildDate>Tue, 21 Dec 2021 11:47:47 +0800</lastBuildDate>
-    
-        <atom:link href="https://kelo7.github.io/tags/markdown/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>使用hugo新建,上传文章</title>
-      <link>https://kelo7.github.io/2021/12/%E4%BD%BF%E7%94%A8hugo%E6%96%B0%E5%BB%BA%E4%B8%8A%E4%BC%A0%E6%96%87%E7%AB%A0/</link>
-      <pubDate>Tue, 21 Dec 2021 11:47:47 +0800</pubDate>
-      
-      <guid>https://kelo7.github.io/2021/12/%E4%BD%BF%E7%94%A8hugo%E6%96%B0%E5%BB%BA%E4%B8%8A%E4%BC%A0%E6%96%87%E7%AB%A0/</guid>
-      <description>hugo使用 不经常用hugo，导致每次使用都要重新翻找教程，干脆把要用的操作写下来备份 创建新文章： hugo new posts/my-first-post.md 这里面值得注意的是，通过上述命令行创</description>
-    </item>
-    
-    <item>
-      <title>拖延怪圈</title>
-      <link>https://kelo7.github.io/2021/12/%E6%8B%96%E5%BB%B6%E6%80%AA%E5%9C%88/</link>
-      <pubDate>Tue, 21 Dec 2021 11:01:56 +0800</pubDate>
-      
-      <guid>https://kelo7.github.io/2021/12/%E6%8B%96%E5%BB%B6%E6%80%AA%E5%9C%88/</guid>
-      <description>拖延怪圈 许多拖延者发现拖延似乎有其自身的生命和意志。他们将之比拟为乘坐在一辆过山车上，情绪随之起起落落，虽然他们想要事情有所进展，但是最终却</description>
-    </item>
-    
-    <item>
-      <title>First</title>
-      <link>https://kelo7.github.io/2020/10/first/</link>
-      <pubDate>Fri, 30 Oct 2020 14:28:50 +0800</pubDate>
-      
-      <guid>https://kelo7.github.io/2020/10/first/</guid>
-      <description>#Hello Hugo
- First Second Third Forth Fifth  </description>
-    </item>
-    
-    <item>
-      <title>My First Post</title>
-      <link>https://kelo7.github.io/2020/10/my-first-post/</link>
-      <pubDate>Thu, 29 Oct 2020 22:07:04 +0800</pubDate>
-      
-      <guid>https://kelo7.github.io/2020/10/my-first-post/</guid>
-      <description>Hello World!</description>
-    </item>
-    
-  </channel>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>markdown - 标签 - kelo&#39;s personal blog</title>
+        <link>https://kelo7.github.io/tags/markdown/</link>
+        <description>markdown - 标签 - kelo&#39;s personal blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 21 Dec 2021 11:47:47 &#43;0800</lastBuildDate><atom:link href="https://kelo7.github.io/tags/markdown/" rel="self" type="application/rss+xml" /><item>
+    <title>使用hugo</title>
+    <link>https://kelo7.github.io/%E4%BD%BF%E7%94%A8hugo/</link>
+    <pubDate>Tue, 21 Dec 2021 11:47:47 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://kelo7.github.io/%E4%BD%BF%E7%94%A8hugo/</guid>
+    <description><![CDATA[hugo使用 不经常用hugo，导致每次使用都要重新翻找教程，干脆把要用的操作写下来备份 创建新文章： 1 hugo new posts/my-first-post.md 这里面值得注意的是，通过上述命令行]]></description>
+</item></channel>
 </rss>
