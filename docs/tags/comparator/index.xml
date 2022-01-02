@@ -1,0 +1,14 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Comparator - 标签 - kelo&#39;s personal blog</title>
+        <link>https://kelo7.github.io/tags/comparator/</link>
+        <description>Comparator - 标签 - kelo&#39;s personal blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Fri, 31 Dec 2021 18:45:28 &#43;0800</lastBuildDate><atom:link href="https://kelo7.github.io/tags/comparator/" rel="self" type="application/rss+xml" /><item>
+    <title>Comparator与lambda表达式</title>
+    <link>https://kelo7.github.io/comparator%E4%B8%8Elambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/</link>
+    <pubDate>Fri, 31 Dec 2021 18:45:28 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://kelo7.github.io/comparator%E4%B8%8Elambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/</guid>
+    <description><![CDATA[Comparator与lambda表达式 从概念到示例]]></description>
+</item></channel>
+</rss>

@@ -3,36 +3,70 @@
         <title>kelo&#39;s personal blog</title>
         <link>https://kelo7.github.io/</link>
         <description>a personal blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 21 Dec 2021 11:47:47 &#43;0800</lastBuildDate>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sat, 01 Jan 2022 00:37:04 &#43;0800</lastBuildDate>
             <atom:link href="https://kelo7.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>删除链表的倒数第N个节点</title>
+    <link>https://kelo7.github.io/%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACn%E4%B8%AA%E8%8A%82%E7%82%B9/</link>
+    <pubDate>Sat, 01 Jan 2022 00:37:04 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://kelo7.github.io/%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACn%E4%B8%AA%E8%8A%82%E7%82%B9/</guid>
+    <description><![CDATA[删除链表的倒数第N个节点的思路与代码]]></description>
+</item><item>
+    <title>单链表的倒数第k个节点</title>
+    <link>https://kelo7.github.io/%E5%8D%95%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACk%E4%B8%AA%E8%8A%82%E7%82%B9/</link>
+    <pubDate>Sat, 01 Jan 2022 00:05:17 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://kelo7.github.io/%E5%8D%95%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACk%E4%B8%AA%E8%8A%82%E7%82%B9/</guid>
+    <description><![CDATA[单链表的倒数第k个节点的思路与代码]]></description>
+</item><item>
+    <title>Comparator与lambda表达式</title>
+    <link>https://kelo7.github.io/comparator%E4%B8%8Elambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/</link>
+    <pubDate>Fri, 31 Dec 2021 18:45:28 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://kelo7.github.io/comparator%E4%B8%8Elambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/</guid>
+    <description><![CDATA[Comparator与lambda表达式 从概念到示例]]></description>
+</item><item>
+    <title>合并k个有序链表</title>
+    <link>https://kelo7.github.io/%E5%90%88%E5%B9%B6k%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/</link>
+    <pubDate>Fri, 31 Dec 2021 18:45:03 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://kelo7.github.io/%E5%90%88%E5%B9%B6k%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/</guid>
+    <description><![CDATA[合并k个有序链表的思路与代码（包括二叉堆与优先级队列）]]></description>
+</item><item>
+    <title>合并两个链表</title>
+    <link>https://kelo7.github.io/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E9%93%BE%E8%A1%A8/</link>
+    <pubDate>Fri, 31 Dec 2021 12:01:50 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://kelo7.github.io/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E9%93%BE%E8%A1%A8/</guid>
+    <description><![CDATA[合并两个链表的思路与代码]]></description>
+</item><item>
+    <title>拖延处理技巧汇编</title>
+    <link>https://kelo7.github.io/%E6%8B%96%E5%BB%B6%E5%A4%84%E7%90%86%E6%8A%80%E5%B7%A7%E6%B1%87%E7%BC%96/</link>
+    <pubDate>Tue, 28 Dec 2021 16:44:02 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://kelo7.github.io/%E6%8B%96%E5%BB%B6%E5%A4%84%E7%90%86%E6%8A%80%E5%B7%A7%E6%B1%87%E7%BC%96/</guid>
+    <description><![CDATA[《拖延心理学》中关于拖延处理技巧的整理]]></description>
+</item><item>
+    <title>明确目标与可行性的计划</title>
+    <link>https://kelo7.github.io/%E6%98%8E%E7%A1%AE%E7%9B%AE%E6%A0%87%E4%B8%8E%E5%8F%AF%E8%A1%8C%E6%80%A7%E7%9A%84%E8%AE%A1%E5%88%92/</link>
+    <pubDate>Tue, 28 Dec 2021 15:04:10 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://kelo7.github.io/%E6%98%8E%E7%A1%AE%E7%9B%AE%E6%A0%87%E4%B8%8E%E5%8F%AF%E8%A1%8C%E6%80%A7%E7%9A%84%E8%AE%A1%E5%88%92/</guid>
+    <description><![CDATA[拖延vs征服之战（一）——目标与计划]]></description>
+</item><item>
     <title>使用hugo</title>
     <link>https://kelo7.github.io/%E4%BD%BF%E7%94%A8hugo/</link>
     <pubDate>Tue, 21 Dec 2021 11:47:47 &#43;0800</pubDate>
     <author>作者</author>
     <guid>https://kelo7.github.io/%E4%BD%BF%E7%94%A8hugo/</guid>
-    <description><![CDATA[hugo使用 不经常用hugo，导致每次使用都要重新翻找教程，干脆把要用的操作写下来备份 创建新文章： 1 hugo new posts/my-first-post.md 这里面值得注意的是，通过上述命令行]]></description>
+    <description><![CDATA[hugo使用 不经常用hugo，导致每次使用都要重新翻找教程，干脆把要常用的操作写下来备份]]></description>
 </item><item>
     <title>拖延怪圈</title>
     <link>https://kelo7.github.io/%E6%8B%96%E5%BB%B6%E6%80%AA%E5%9C%88/</link>
     <pubDate>Tue, 21 Dec 2021 11:01:56 &#43;0800</pubDate>
     <author>作者</author>
     <guid>https://kelo7.github.io/%E6%8B%96%E5%BB%B6%E6%80%AA%E5%9C%88/</guid>
-    <description><![CDATA[拖延怪圈 许多拖延者发现拖延似乎有其自身的生命和意志。他们将之比拟为乘坐在一辆过山车上，情绪随之起起落落，虽然他们想要事情有所进展，但是最终却]]></description>
-</item><item>
-    <title>A test post</title>
-    <link>https://kelo7.github.io/first/</link>
-    <pubDate>Fri, 30 Oct 2020 14:28:50 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://kelo7.github.io/first/</guid>
-    <description><![CDATA[#Hello Hugo
- First Second Third Forth Fifth  ]]></description>
-</item><item>
-    <title>My First Post</title>
-    <link>https://kelo7.github.io/my-first-post/</link>
-    <pubDate>Thu, 29 Oct 2020 22:07:04 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://kelo7.github.io/my-first-post/</guid>
-    <description><![CDATA[Hello World!]]></description>
+    <description><![CDATA[一篇关于拖延怪圈，拖延行为中的共性（包括思绪、情感、行为波动）的文章]]></description>
 </item></channel>
 </rss>

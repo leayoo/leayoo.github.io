@@ -1,0 +1,1716 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Comparator与lambda表达式 - kelo&#39;s personal blog</title><meta name="Description" content="a personal blog"><meta property="og:title" content="Comparator与lambda表达式" />
+<meta property="og:description" content="Comparator与lambda表达式 从概念到示例" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kelo7.github.io/comparator%E4%B8%8Elambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" />
+<meta property="og:image" content="https://kelo7.github.io/logo.png"/>
+<meta property="article:published_time" content="2021-12-31T18:45:28+08:00" />
+<meta property="article:modified_time" content="2021-12-31T18:45:28+08:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://kelo7.github.io/logo.png"/>
+
+<meta name="twitter:title" content="Comparator与lambda表达式"/>
+<meta name="twitter:description" content="Comparator与lambda表达式 从概念到示例"/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://kelo7.github.io/comparator%E4%B8%8Elambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" /><link rel="prev" href="https://kelo7.github.io/%E5%90%88%E5%B9%B6k%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/" /><link rel="next" href="https://kelo7.github.io/%E5%8D%95%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACk%E4%B8%AA%E8%8A%82%E7%82%B9/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Comparator与lambda表达式",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/kelo7.github.io\/comparator%E4%B8%8Elambda%E8%A1%A8%E8%BE%BE%E5%BC%8F\/"
+        },"genre": "posts","keywords": "Java, Comparator, lambda","wordcount":  8217 ,
+        "url": "https:\/\/kelo7.github.io\/comparator%E4%B8%8Elambda%E8%A1%A8%E8%BE%BE%E5%BC%8F\/","datePublished": "2021-12-31T18:45:28+08:00","dateModified": "2021-12-31T18:45:28+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "kelo"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="kelo&#39;s personal blog">Kelo&#39;s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="kelo&#39;s personal blog">Kelo&#39;s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Comparator与lambda表达式</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>kelo</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/java-8/"><i class="far fa-folder fa-fw"></i>Java 8</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-12-31">2021-12-31</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 8217 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 17 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#comparator与lambda表达式">Comparator与lambda表达式</a>
+      <ul>
+        <li><a href="#前言">前言</a></li>
+        <li><a href="#概述">概述</a></li>
+        <li><a href="#comparator使用示例">Comparator使用示例</a></li>
+        <li><a href="#使用comparator进行排序">使用Comparator进行排序</a></li>
+        <li><a href="#重用comparator">重用Comparator</a></li>
+        <li><a href="#多重比较和流式比较">多重比较和流式比较</a></li>
+        <li><a href="#本节代码汇总">本节代码汇总</a></li>
+        <li><a href="#比较器comparator中lambda的使用">比较器Comparator中lambda的使用</a></li>
+        <li><a href="#拓展">拓展</a></li>
+        <li><a href="#原文">原文</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://gitee.com/li_yue1999/picture-of-note/raw/master/img/wallhaven-m9rqpm.jpg"
+        data-srcset="https://gitee.com/li_yue1999/picture-of-note/raw/master/img/wallhaven-m9rqpm.jpg, https://gitee.com/li_yue1999/picture-of-note/raw/master/img/wallhaven-m9rqpm.jpg 1.5x, https://gitee.com/li_yue1999/picture-of-note/raw/master/img/wallhaven-m9rqpm.jpg 2x"
+        data-sizes="auto"
+        alt="https://gitee.com/li_yue1999/picture-of-note/raw/master/img/wallhaven-m9rqpm.jpg"
+        title="General 1920x941 artwork fantasy art architecture Asian architecture" /></p>
+<h2 id="comparator与lambda表达式">Comparator与lambda表达式</h2>
+<h3 id="前言">前言</h3>
+<ol>
+<li>
+<p>本文有些地方懒得做翻译(不过不难)</p>
+</li>
+<li>
+<p>看不懂的地方别纠结，一直往下看，也许会明白（因为有些部分重复了）。</p>
+</li>
+</ol>
+<h3 id="概述">概述</h3>
+<p><strong>参数类型</strong></p>
+<p><code>T</code> -可以通过该比较器比较对象的类型</p>
+<p><strong>Functional Interface:</strong></p>
+<p>这是一个功能接口，因此可以作为赋值的目标一个<u>lambda表达式</u>或方法参考。</p>
+<p>（因为是一个功能性接口，所以也可以通过lambda表达式实现。）</p>
+<blockquote>
+<p>A comparison function, which imposes a total ordering on some collection of objects. Comparators can be passed to a sort method (such as Collections.sort or Arrays.sort) to allow precise control over the sort order. Comparators can also be used to control the order of certain data structures (such as sorted sets or sorted maps), or to provide an ordering for collections of objects that don&rsquo;t have a natural ordering.</p>
+</blockquote>
+<p>一个比较函数，比较器可以通过某种方法（如 <a href="../../java/util/Collections.html#sort-java.util.List-java.util.Comparator-" rel=""><code>Collections.sort</code></a>或  <a href="../../java/util/Arrays.html#sort-T:A-java.util.Comparator-" rel=""><code>Arrays.sort</code></a>）允许精确控制排序顺序。</p>
+<p>比较器也可以用来控制特定的数据结构顺序（如 <a href="../../java/util/SortedSet.html" rel=""><code>sorted sets</code></a>或 <a href="../../java/util/SortedMap.html" rel=""><code>sorted maps</code></a>），或提供的对象不集合排序有  <a href="../../java/lang/Comparable.html" rel=""><code>natural ordering</code></a>。</p>
+<p>所以，Comparator 是比较器接口。</p>
+<p>我们若需要控制某个类的次序，而该类本身不支持排序(即没有实现Comparable接口)；那么，我们可以建立一个“该类的比较器”来进行排序。这个“比较器”只需要实现Comparator接口即可。</p>
+<p>也就是说，我们可以通过“<strong>实现Comparator类来新建一个比较器</strong>”，然后通过该比较器对类进行排序。</p>
+<p><strong>Comparator 定义</strong></p>
+<p>Comparator 接口仅仅只包括两个个函数，它的定义如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="nn">java.util</span><span class="o">;</span>
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Comparator</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="nf">compare</span><span class="o">(</span><span class="n">T</span> <span class="n">o1</span><span class="o">,</span> <span class="n">T</span> <span class="n">o2</span><span class="o">);</span>
+    <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="n">Object</span> <span class="n">obj</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>说明：</p>
+<ol>
+<li>若一个类要实现Comparator接口：它一定要实现compareTo(T o1, T o2) 函数，但可以不实现 equals(Object obj) 函数。</li>
+</ol>
+<p>为什么可以不实现 equals(Object obj) 函数呢？ 因为任何类，默认都是已经实现了equals(Object obj)的。 Java中的一切类都是继承于java.lang.Object，在Object.java中实现了equals(Object obj)函数；所以，其它所有的类也相当于都实现了该函数。</p>
+<ol start="2">
+<li><code>int compare(T o1, T o2)</code> 是<u>“比较o1和o2的大小”。返回“负数”，意味着“o1比o2小”；返回“零”，意味着“o1等于o2”；返回“正数”，意味着“o1大于o2”</u>。</li>
+</ol>
+<h3 id="comparator使用示例">Comparator使用示例</h3>
+<p>首先，我们先创建一个Player类</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Player</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">ranking</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">age</span><span class="o">;</span>
+    
+    <span class="c1">// constructor, getters, setters  
+</span><span class="c1"></span><span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>然后我们尝试对其进行初始化及分类</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">Player</span><span class="o">&gt;</span> <span class="n">footballTeam</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+    <span class="n">Player</span> <span class="n">player1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Player</span><span class="o">(</span><span class="n">59</span><span class="o">,</span> <span class="s">&#34;John&#34;</span><span class="o">,</span> <span class="n">20</span><span class="o">);</span>
+    <span class="n">Player</span> <span class="n">player2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Player</span><span class="o">(</span><span class="n">67</span><span class="o">,</span> <span class="s">&#34;Roger&#34;</span><span class="o">,</span> <span class="n">22</span><span class="o">);</span>
+    <span class="n">Player</span> <span class="n">player3</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Player</span><span class="o">(</span><span class="n">45</span><span class="o">,</span> <span class="s">&#34;Steven&#34;</span><span class="o">,</span> <span class="n">24</span><span class="o">);</span>
+    <span class="n">footballTeam</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">player1</span><span class="o">);</span>
+    <span class="n">footballTeam</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">player2</span><span class="o">);</span>
+    <span class="n">footballTeam</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">player3</span><span class="o">);</span>
+
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Before Sorting : &#34;</span> <span class="o">+</span> <span class="n">footballTeam</span><span class="o">);</span>
+    <span class="n">Collections</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">footballTeam</span><span class="o">);</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;After Sorting : &#34;</span> <span class="o">+</span> <span class="n">footballTeam</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>会出现编译错误</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">The method sort(List&lt;T&gt;) in the type Collections 
+  is not applicable for the arguments (ArrayList&lt;Player&gt;)
+</code></pre></td></tr></table>
+</div>
+</div><p>使用Comparator对其进行改造</p>
+<blockquote>
+<p><strong>The <code>Comparator</code> interface defines a <code>compare(arg1, arg2)</code> method</strong> with two arguments that represent compared objects, and works similarly to the <em>Comparable.compareTo()</em> method.</p>
+</blockquote>
+<p><strong>Creating Comparators</strong></p>
+<p>To create a <em>Comparator,</em> we have to implement the <em>Comparator</em> interface.</p>
+<p>For our first example, we&rsquo;ll create a <em>Comparator</em> to use the <em>ranking</em> attribute of <em>Player</em> to sort the players:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">PlayerRankingComparator</span> <span class="kd">implements</span> <span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Player</span><span class="o">&gt;</span> <span class="o">{</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">compare</span><span class="o">(</span><span class="n">Player</span> <span class="n">firstPlayer</span><span class="o">,</span> <span class="n">Player</span> <span class="n">secondPlayer</span><span class="o">)</span> <span class="o">{</span>
+       <span class="k">return</span> <span class="n">Integer</span><span class="o">.</span><span class="na">compare</span><span class="o">(</span><span class="n">firstPlayer</span><span class="o">.</span><span class="na">getRanking</span><span class="o">(),</span> <span class="n">secondPlayer</span><span class="o">.</span><span class="na">getRanking</span><span class="o">());</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Similarly, we can create a <em>Comparator</em> to use the <em>age</em> attribute of <em>Player</em> to sort the players:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">PlayerAgeComparator</span> <span class="kd">implements</span> <span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Player</span><span class="o">&gt;</span> <span class="o">{</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">compare</span><span class="o">(</span><span class="n">Player</span> <span class="n">firstPlayer</span><span class="o">,</span> <span class="n">Player</span> <span class="n">secondPlayer</span><span class="o">)</span> <span class="o">{</span>
+       <span class="k">return</span> <span class="n">Integer</span><span class="o">.</span><span class="na">compare</span><span class="o">(</span><span class="n">firstPlayer</span><span class="o">.</span><span class="na">getAge</span><span class="o">(),</span> <span class="n">secondPlayer</span><span class="o">.</span><span class="na">getAge</span><span class="o">());</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>Comparators in Action</strong></p>
+<p>To demonstrate the concept, let&rsquo;s modify our <em>PlayerSorter</em> by introducing a second argument to the <em>Collections.sort</em> method*,* which is actually the instance of *Comparator* we want to use.</p>
+<p><strong>Using this approach, we can override the natural ordering</strong>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">PlayerRankingComparator</span> <span class="n">playerComparator</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PlayerRankingComparator</span><span class="o">();</span>
+<span class="n">Collections</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">footballTeam</span><span class="o">,</span> <span class="n">playerComparator</span><span class="o">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Now let&rsquo;s run our <em>PlayerRankingSorter to</em> see the result:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Before</span> <span class="n">Sorting</span> <span class="o">:</span> <span class="o">[</span><span class="n">John</span><span class="o">,</span> <span class="n">Roger</span><span class="o">,</span> <span class="n">Steven</span><span class="o">]</span>
+<span class="n">After</span> <span class="n">Sorting</span> <span class="n">by</span> <span class="n">ranking</span> <span class="o">:</span> <span class="o">[</span><span class="n">Steven</span><span class="o">,</span> <span class="n">John</span><span class="o">,</span> <span class="n">Roger</span><span class="o">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>If we want a different sorting order, we only need to change the <em>Comparator</em> we&rsquo;re using:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">PlayerAgeComparator</span> <span class="n">playerComparator</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PlayerAgeComparator</span><span class="o">();</span>
+<span class="n">Collections</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">footballTeam</span><span class="o">,</span> <span class="n">playerComparator</span><span class="o">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Now when we run our <em>PlayerAgeSorter</em>, we can see a different sort order by <em>age:</em></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Before</span> <span class="n">Sorting</span> <span class="o">:</span> <span class="o">[</span><span class="n">John</span><span class="o">,</span> <span class="n">Roger</span><span class="o">,</span> <span class="n">Steven</span><span class="o">]</span>
+<span class="n">After</span> <span class="n">Sorting</span> <span class="n">by</span> <span class="n">age</span> <span class="o">:</span> <span class="o">[</span><span class="n">Roger</span><span class="o">,</span> <span class="n">John</span><span class="o">,</span> <span class="n">Steven</span><span class="o">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>Java 8 Comparators</strong></p>
+<p><u>Java 8 provides new ways of defining <em>Comparators</em> by using lambda expressions, and the <em>comparing()</em> static factory method.</u></p>
+<p>Let&rsquo;s see a quick example of how to use a lambda expression to create a <em>Comparator</em>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Comparator</span> <span class="n">byRanking</span> <span class="o">=</span> 
+  <span class="o">(</span><span class="n">Player</span> <span class="n">player1</span><span class="o">,</span> <span class="n">Player</span> <span class="n">player2</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">Integer</span><span class="o">.</span><span class="na">compare</span><span class="o">(</span><span class="n">player1</span><span class="o">.</span><span class="na">getRanking</span><span class="o">(),</span> <span class="n">player2</span><span class="o">.</span><span class="na">getRanking</span><span class="o">());</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>The <em>Comparator.comparing</em> method takes a method calculating the property that will be used for comparing items, and returns a matching <em>Comparator</em> instance:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Player</span><span class="o">&gt;</span> <span class="n">byRanking</span> <span class="o">=</span> <span class="n">Comparator</span>
+  <span class="o">.</span><span class="na">comparing</span><span class="o">(</span><span class="n">Player</span><span class="o">::</span><span class="n">getRanking</span><span class="o">);</span>
+<span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Player</span><span class="o">&gt;</span> <span class="n">byAge</span> <span class="o">=</span> <span class="n">Comparator</span>
+  <span class="o">.</span><span class="na">comparing</span><span class="o">(</span><span class="n">Player</span><span class="o">::</span><span class="n">getAge</span><span class="o">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>To explore the Java 8 functionality in-depth, check out our <a href="https://www.baeldung.com/java-8-comparator-comparing" target="_blank" rel="noopener noreffer">Java 8 Comparator.comparing</a> guide.</p>
+<p><strong>Avoiding the Subtraction Trick</strong></p>
+<p>Over the course of this tutorial, we&rsquo;ve used the <em>Integer.compare()</em> method to compare two integers. However, one might argue that we should use this clever one-liner instead:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Player</span><span class="o">&gt;</span> <span class="n">comparator</span> <span class="o">=</span> <span class="o">(</span><span class="n">p1</span><span class="o">,</span> <span class="n">p2</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">p1</span><span class="o">.</span><span class="na">getRanking</span><span class="o">()</span> <span class="o">-</span> <span class="n">p2</span><span class="o">.</span><span class="na">getRanking</span><span class="o">();</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>Although it&rsquo;s much more concise than other solutions, it can be a victim of integer overflows in Java</strong>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Player</span> <span class="n">player1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Player</span><span class="o">(</span><span class="n">59</span><span class="o">,</span> <span class="s">&#34;John&#34;</span><span class="o">,</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">);</span>
+<span class="n">Player</span> <span class="n">player2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Player</span><span class="o">(</span><span class="n">67</span><span class="o">,</span> <span class="s">&#34;Roger&#34;</span><span class="o">,</span> <span class="o">-</span><span class="n">1</span><span class="o">);</span>
+
+<span class="n">List</span><span class="o">&lt;</span><span class="n">Player</span><span class="o">&gt;</span> <span class="n">players</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="n">player1</span><span class="o">,</span> <span class="n">player2</span><span class="o">);</span>
+<span class="n">players</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">comparator</span><span class="o">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Since -1 is much less than the <em>Integer.MAX_VALUE</em>, “Roger” should come before “John” in the sorted collection. <strong>However, due to integer overflow, the <code>“Integer.MAX_VALUE – (-1)”</code> will be less than zero</strong>. So based on the <em>Comparator/Comparable</em> contract, the <em>Integer.MAX_VALUE</em> is less than -1, which is obviously incorrect.</p>
+<p>Therefore, despite what we expected, “John” comes before “Roger” in the sorted collection:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">assertEquals</span><span class="o">(</span><span class="s">&#34;John&#34;</span><span class="o">,</span> <span class="n">players</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">0</span><span class="o">).</span><span class="na">getName</span><span class="o">());</span>
+<span class="n">assertEquals</span><span class="o">(</span><span class="s">&#34;Roger&#34;</span><span class="o">,</span> <span class="n">players</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">1</span><span class="o">).</span><span class="na">getName</span><span class="o">());</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="使用comparator进行排序">使用Comparator进行排序</h3>
+<p>Comparator接口的身影在JDK库中随处可见，从查找到排序，再到反转操作，等等。Java 8里它变成了一个函数式接口，这样的好处就是我们可以使用流式语法来实现比较器了。</p>
+<p>我们用几种不同的方式来实现一下Comparator，看看新式语法的价值所在。你的手指头会感谢你的，不用实现匿名内部类少敲了多少键盘啊。</p>
+<p>（动手实践一下，能帮助理解）</p>
+<p>下面这个例子将使用不同的比较方法，来将一组人进行排序。我们先来创建一个Person的JavaBean。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Person</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
+
+    <span class="kd">private</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">age</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">Person</span><span class="o">(</span><span class="kd">final</span> <span class="n">String</span> <span class="n">theName</span><span class="o">,</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">theAge</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">theName</span><span class="o">;</span>
+        <span class="n">age</span> <span class="o">=</span> <span class="n">theAge</span><span class="o">;</span>
+
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">name</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getAge</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">age</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">ageDifference</span><span class="o">(</span><span class="kd">final</span> <span class="n">Person</span> <span class="n">other</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">age</span> <span class="o">-</span> <span class="n">other</span><span class="o">.</span><span class="na">age</span><span class="o">;</span>
+
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">&#34;%s - %d&#34;</span><span class="o">,</span> <span class="n">name</span><span class="o">,</span> <span class="n">age</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+
+</code></pre></td></tr></table>
+</div>
+</div><p>我们可以通过Person类来实现Comparator接口，不过这样我们只能使用一种比较方式。我们希望能比较不同的属性——比如名字，年龄，或者这些的组合。为了可以灵活的进行比较，我们可以使用Comparator，当我们需要进行比较的时候，再去生成相关的代码。</p>
+<p>我们先来创建一个Person的列表，每个人都有不同的名字和年龄。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java">        <span class="kd">final</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span> <span class="n">people</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span>
+                <span class="k">new</span> <span class="n">Person</span><span class="o">(</span><span class="s">&#34;John&#34;</span><span class="o">,</span> <span class="n">20</span><span class="o">),</span>
+                <span class="k">new</span> <span class="n">Person</span><span class="o">(</span><span class="s">&#34;Sara&#34;</span><span class="o">,</span> <span class="n">21</span><span class="o">),</span>
+                <span class="k">new</span> <span class="n">Person</span><span class="o">(</span><span class="s">&#34;Jane&#34;</span><span class="o">,</span> <span class="n">21</span><span class="o">),</span>
+                <span class="k">new</span> <span class="n">Person</span><span class="o">(</span><span class="s">&#34;Greg&#34;</span><span class="o">,</span> <span class="n">35</span><span class="o">));</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>我们可以通过人的名字或者年龄来对他们进行升序或者降序的排序。</p>
+<p>一般的方法就是使用<u>匿名内部类</u>来实现Comparator接口。这样写的话只有比较相关的代码是有意义的，其它的都只是走走形式而已。而使用lambda表达式则可以聚焦到比较的本质上来。</p>
+<p><strong>按照年龄排序</strong></p>
+<p>我们先按<u>年龄从小到大</u>对他们进行排序。</p>
+<p>既然我们已经有了一个List对象，我们可以用它的sort()方法来进行排序。不过这个方法也有它的问题。<u>这是一个void方法，也就是说当我们调用这个方法的时候，这个列表会发生改动。要保留原始列表的话，我们得先拷贝出一份来，然后再调用sort()方法。</u>这简直太费劲了。这个时候我们得求助下Stream类了。</p>
+<p>我们可以从List那获取一个Stream对象，然后调用它的sorted()方法。它会返回一个排好序的集合，而不是在原来的集合上做修改。使用这个方法的话可以很方便的配置Comparator的参数。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">List</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span> <span class="n">ascendingAge</span> <span class="o">=</span>
+                <span class="n">people</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
+                        <span class="o">.</span><span class="na">sorted</span><span class="o">((</span><span class="n">person1</span><span class="o">,</span> <span class="n">person2</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">person1</span><span class="o">.</span><span class="na">ageDifference</span><span class="o">(</span><span class="n">person2</span><span class="o">))</span>
+                        <span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="n">toList</span><span class="o">());</span>
+        <span class="n">printPeople</span><span class="o">(</span><span class="s">&#34;Sorted in ascending order by age: &#34;</span><span class="o">,</span> <span class="n">ascendingAge</span><span class="o">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol>
+<li>
+<p>我们先通过stream()方法将列表转化成一个Stream对象。</p>
+</li>
+<li>
+<p>然后调用它的sorted()方法。这个方法接受一个Comparator参数。由于Comparator是一个函数式接口，我们可以传入一个lambda表达式。</p>
+</li>
+<li>
+<p>最后我们调用collect方法，让它把结果存储到一个列表里。collect方法是一个归约器，它能把迭代过程中的对象输出成某种特定的格式或者类型。toList()方法是Collectors类的一个静态方法。</p>
+</li>
+</ol>
+<p>Comparator的抽象方法compareTo()接收两个参数，也就是要比较的对象，并返回一个int类型的结果。为了兼容这个，我们的lambda表达式也接收两个参数，两个Person对象，它们的类型是由编译器自动推导的。我们返回一个int类型，表明比较的对象是否相等。</p>
+<p>因为要按年龄进行排序，所以我们会比较两个对象的年龄，然后返回比较的结果。<u>如果他们一样大，则返回0。否则如果第一个人更年轻的话就返回一个负数，更年长的话就返回正数。</u>（相当于第一个减去第二个）</p>
+<p>sorted()方法会遍历目标集合的每个元素并调用指定的Comparator，来确定出元素的排序顺序。sorted()方法的执行方式有点类似前面说到的reduce()方法。reduce()方法把列表逐步归约出一个结果。而sorted()方法则通过比较的结果来进行排序。</p>
+<p>一旦我们排好序后我们想要把结果打印出来，因此我们调用了一个<code>printPeople()</code>方法;下面来实现下这个方法。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">printPeople</span><span class="o">(</span>
+<span class="kd">final</span> <span class="n">String</span> <span class="n">message</span><span class="o">,</span> <span class="kd">final</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span> <span class="n">people</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">message</span><span class="o">);</span>
+    <span class="n">people</span><span class="o">.</span><span class="na">forEach</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">::</span><span class="n">println</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这个方法中，我们先打印了一个消息，然后遍历列表，打印出里面的每个元素。</p>
+<p>我们来调用下sorted()方法看看，它会将列表中的人按年龄从小到大进行排列。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Sorted in ascending order by age:
+John - 20
+Sara - 21
+Jane - 21
+Greg - 35
+</code></pre></td></tr></table>
+</div>
+</div><p>我们再看一下sorted()方法，来做一个改进。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="o">.</span><span class="na">sorted</span><span class="o">((</span><span class="n">person1</span><span class="o">,</span> <span class="n">person2</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">person1</span><span class="o">.</span><span class="na">ageDifference</span><span class="o">(</span><span class="n">person2</span><span class="o">))</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在传入的这个lambda表达式里，我们只是简单的路由了下这两个参数——<u>第一个参数作为ageDifference()方法的调用目标，而第二个作为它的参数</u>。但是我们可以不这么写，而是用一个office-space模式——也就是使用方法引用，让Java编译器去做路由。</p>
+<p>这里用到的参数路由和前面看到的有点不同。我们之前看到的，要么参数是作为调用目标，要么是作为调用参数。而现在，我们有两个参数，我们希望能分成两个部分，<u>一个是作为方法调用的目标，第二个则作为参数</u>。别担心，Java编译器会告诉你，“这个我来搞定”。</p>
+<p>我们可以把前面的sorted()方法里面的lambda表达式替换成一个短小精悍的ageDifference方法。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">people</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">sorted</span><span class="o">(</span><span class="n">Person</span><span class="o">::</span><span class="n">ageDifference</span><span class="o">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这段代码非常简洁，这多亏了Java编译器提供的方法引用。编译器接收到两个person实例的参数，<u>把第一个用作ageDifference()方法的调用目标，而第二个作为方法参数</u>。<u>我们让编译器去做这个工作，而不是自己直接去写代码。当使用这种方式的时候，我们必须确定第一个参数就是引用的方法的调用目标，而剩下那个就是方法的入参。</u></p>
+<h3 id="重用comparator">重用Comparator</h3>
+<p>我们很容易就将列表中的人按年龄从小到大排好序了，当然从大到小进行排序也很容易。我们来试一下。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">printPeople</span><span class="o">(</span><span class="s">&#34;Sorted in descending order by age: &#34;</span><span class="o">,</span> <span class="n">people</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">sorted</span><span class="o">((</span><span class="n">person1</span><span class="o">,</span> <span class="n">person2</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">person2</span><span class="o">.</span><span class="na">ageDifference</span><span class="o">(</span><span class="n">person1</span><span class="o">)).</span><span class="na">collect</span><span class="o">(</span><span class="n">toList</span><span class="o">()));</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>我们调用了sorted()方法并<u>传入一个lambda表达式，它正好能适配成Comparator接口</u>，就像前面的例子那样。唯一不同的就是这个lambda表达式的实现——我们把要比较的人调了下顺序。结果应该是按他们的年龄由从大到小排列的。我们来看一下。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Sorted in descending order by age:
+Greg - 35
+Sara - 21
+Jane - 21
+John - 20
+</code></pre></td></tr></table>
+</div>
+</div><p>只是改一下比较的逻辑费不了太多劲。但我们没法把这个版本重构成方法引用的，因为参数的顺序不符合方法引用的参数路由的规则；第一个参数并不是用作方法的调用目标，而是作为方法参数。有一个方法能解决这个问题，同时它还能减少重复的工作。我们来看下如何实现。</p>
+<p>前面我们已经创建了两个lambda表达式：一个是按年龄从小到大排序，一个是从大到小排序。这么做的话，会出现代码冗余和重复，并破坏了DRY原则。如果我们只是想要调整下排序顺序的话，JDK提供了一个reverse方法，它有一个特殊的方法修饰符，default。我们会在77页中的default方法来讨论它，这里我们先用下这个reversed()方法来去除冗余性。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span> <span class="n">compareAscending</span> <span class="o">=</span>
+<span class="o">(</span><span class="n">person1</span><span class="o">,</span> <span class="n">person2</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">person1</span><span class="o">.</span><span class="na">ageDifference</span><span class="o">(</span><span class="n">person2</span><span class="o">);</span>
+<span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span> <span class="n">compareDescending</span> <span class="o">=</span> <span class="n">compareAscending</span><span class="o">.</span><span class="na">reversed</span><span class="o">();</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>我们先创建了一个Comparator，compareAscending，来将人按年龄从小到大进行排序。为了反转比较顺序，而不是再写一次这个代码，我们只需要调用一下这个第一个Comparator的reversed()方法就可以获取第二个Comparator对象。在reversed()方法底层，它创建了一个比较器，来交换了比较的参数的顺序。这说明reversed也是一个高阶方法——它创建并返回了一个无副作用的函数。我们把这个两个比较器用到代码里。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">printPeople</span><span class="o">(</span><span class="s">&#34;Sorted in ascending order by age: &#34;</span><span class="o">,</span>
+      <span class="n">people</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">sorted</span><span class="o">(</span><span class="n">compareAscending</span><span class="o">)</span>
+			<span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="n">toList</span><span class="o">()));</span>
+
+<span class="n">printPeople</span><span class="o">(</span><span class="s">&#34;Sorted in descending order by age: &#34;</span><span class="o">,</span>
+	  <span class="n">people</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">sorted</span><span class="o">(</span><span class="n">compareDescending</span><span class="o">)</span>
+            <span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="n">toList</span><span class="o">()));</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>从代码中明显可以看到，Java8的这些新特性极大的减少了代码的冗余及复杂度，不过好处远不止这些，JDK里还有无限可能等着你去探索。</p>
+<p><strong>按照名字排序</strong></p>
+<p>我们已经可以按年龄进行排序了，想按名字来排序的话也很简单。我们来按名字进行字典序排列，同样的，只需要改下lambda表达式里的逻辑就好了。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">printPeople</span><span class="o">(</span><span class="s">&#34;Sorted in ascending order by name: &#34;</span><span class="o">,</span>
+<span class="n">people</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">sorted</span><span class="o">((</span><span class="n">person1</span><span class="o">,</span> <span class="n">person2</span><span class="o">)</span> <span class="o">-&gt;</span>
+<span class="n">person1</span><span class="o">.</span><span class="na">getName</span><span class="o">().</span><span class="na">compareTo</span><span class="o">(</span><span class="n">person2</span><span class="o">.</span><span class="na">getName</span><span class="o">()))</span>
+<span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="n">toList</span><span class="o">()));</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>输出的结果里会按名字的字典序进行排列。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Sorted</span> <span class="n">in</span> <span class="n">ascending</span> <span class="n">order</span> <span class="n">by</span> <span class="n">name</span><span class="o">:</span>
+<span class="n">Greg</span> <span class="o">-</span> <span class="n">35</span>
+<span class="n">Jane</span> <span class="o">-</span> <span class="n">21</span>
+<span class="n">John</span> <span class="o">-</span> <span class="n">20</span>
+<span class="n">Sara</span> <span class="o">-</span> <span class="n">21</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>现在为止，我们要么就按年龄排序，要么就按名字排序。我们可以让lambda表达式的逻辑更智能一些。</p>
+<p>比如我们可以<strong>同时按年龄和名字排序</strong>。</p>
+<p>我们来选出列表中<strong>最年轻的</strong>人来。我们可以先按年龄从小到大排序然后选中结果中的第一个。不过其实用不着那样，Stream有一个min()方法可以实现这个。这个方法同样也接受一个Comparator，不过返回的是集合中最小的对象。我们来用下它。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">people</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">min</span><span class="o">(</span><span class="n">Person</span><span class="o">::</span><span class="n">ageDifference</span><span class="o">)</span>
+<span class="o">.</span><span class="na">ifPresent</span><span class="o">(</span><span class="n">youngest</span> <span class="o">-&gt;</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Youngest: &#34;</span> <span class="o">+</span> <span class="n">youngest</span><span class="o">));</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>调用min()方法的时候我们用了ageDifference这个方法引用。</p>
+<p><u>min()方法返回的是一个Optinal对象</u>，因为列表可能为空并且里面可能不止一个年纪最小的人。<u>接着我们通过Optinal的ifPrsend()方法获取到年纪最小的那个人，并打印出他的详细信息。</u>来看下输出结果。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="nl">Youngest:</span> <span class="n">John</span> <span class="o">-</span> <span class="n">20</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>输出年纪最大的同样也很简单。只要把这个方法引用传给一个max()方法就好了。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">people</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">max</span><span class="o">(</span><span class="n">Person</span><span class="o">::</span><span class="n">ageDifference</span><span class="o">)</span>
+<span class="o">.</span><span class="na">ifPresent</span><span class="o">(</span><span class="n">eldest</span> <span class="o">-&gt;</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Eldest: &#34;</span> <span class="o">+</span> <span class="n">eldest</span><span class="o">));</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>我们来看下最年长那位的名字和年龄。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="nl">Eldest:</span> <span class="n">Greg</span> <span class="o">-</span> <span class="n">35</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>有了lambda表达式和方法引用之后，比较器的实现变得更简洁也更方便了。JDK也给Compararor类引入了不少便利的方法，使得我们可以更流畅的进行比较，下面我们将会看到。</p>
+<h3 id="多重比较和流式比较">多重比较和流式比较</h3>
+<p>我们来看下Comparator接口提供了哪些方便的新方法，并用它们来进行多个属性的比较。</p>
+<p>我们还是继续使用上节中的那个例子。按名字排序的话，我们上面是这么写的：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">people</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
+<span class="o">.</span><span class="na">sorted</span><span class="o">((</span><span class="n">person1</span><span class="o">,</span> <span class="n">person2</span><span class="o">)</span> <span class="o">-&gt;</span>
+<span class="n">person1</span><span class="o">.</span><span class="na">getName</span><span class="o">().</span><span class="na">compareTo</span><span class="o">(</span><span class="n">person2</span><span class="o">.</span><span class="na">getName</span><span class="o">()));</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>和上个世纪的内部类的写法比起来，这种写法简直太简洁了。不过如果用了Comparator类里面的一些函数能让它变得更简单，使用这些函数能够让我们更流畅的表述自己的目的。比如说，要按名字排序的话，我们可以这么写：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">final</span> <span class="n">Function</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">byName</span> <span class="o">=</span> <span class="n">person</span> <span class="o">-&gt;</span> <span class="n">person</span><span class="o">.</span><span class="na">getName</span><span class="o">();</span>
+<span class="n">people</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">sorted</span><span class="o">(</span><span class="n">comparing</span><span class="o">(</span><span class="n">byName</span><span class="o">));</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这段代码中我们导入了Comparator类的静态方法comparing()。<u>comparing()方法使用传入的lambda表达式来生成一个Comparator对象。也就是说，它也是一个高阶函数，<strong>接受一个函数入参并返回另一个函数</strong>。除了能让语法变得更简洁外，这样的代码读起来也能更好的表述我们想要解决的实际问题。</u></p>
+<p>有了它，进行多重比较的时候也能变得更加流畅。比如，下面这段按名字和年龄比较的代码就能说明一切：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">final</span> <span class="n">Function</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">byAge</span> <span class="o">=</span> <span class="n">person</span> <span class="o">-&gt;</span> <span class="n">person</span><span class="o">.</span><span class="na">getAge</span><span class="o">();</span>
+<span class="kd">final</span> <span class="n">Function</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">byTheirName</span> <span class="o">=</span> <span class="n">person</span> <span class="o">-&gt;</span> <span class="n">person</span><span class="o">.</span><span class="na">getName</span><span class="o">();</span>
+<span class="n">printPeople</span><span class="o">(</span><span class="s">&#34;Sorted in ascending order by age and name: &#34;</span><span class="o">,</span>
+<span class="n">people</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
+<span class="o">.</span><span class="na">sorted</span><span class="o">(</span><span class="n">comparing</span><span class="o">(</span><span class="n">byAge</span><span class="o">).</span><span class="na">thenComparing</span><span class="o">(</span><span class="n">byTheirName</span><span class="o">))</span>
+<span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="n">toList</span><span class="o">()));</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>我们先是创建了两个lambda表达式，一个返回指定人的年龄，一个返回的是他的名字。在调用sorted()方法的时候我们把这两个表达式组合 到了一起，这样就能进行多个属性的比较了。comparing()方法创建并返回了一个按年龄比较的Comparator ,我们再调用这个返回的Comparator上面的thenComparing()方法来创建一个组合的比较器，它会对年龄和名字两项进行比较。下面的输出是先按年龄再按名字进行排序后的结果。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Sorted in ascending order by age and name:
+John - 20
+Jane - 21
+Sara - 21
+Greg - 35
+</code></pre></td></tr></table>
+</div>
+</div><p>可以看到，使用lambda表达式和JDK提供的新的工具类，可以很容易的将Comparator的实现进行组合。</p>
+<h3 id="本节代码汇总">本节代码汇总</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">import</span> <span class="nn">java.util.Arrays</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Comparator</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.function.Function</span><span class="o">;</span>
+
+<span class="kn">import static</span> <span class="nn">java.util.Comparator.comparing</span><span class="o">;</span>
+<span class="kn">import static</span> <span class="nn">java.util.stream.Collectors.toList</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Person</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
+
+    <span class="kd">private</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">age</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">Person</span><span class="o">(</span><span class="kd">final</span> <span class="n">String</span> <span class="n">theName</span><span class="o">,</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">theAge</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">theName</span><span class="o">;</span>
+        <span class="n">age</span> <span class="o">=</span> <span class="n">theAge</span><span class="o">;</span>
+
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">name</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getAge</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">age</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">ageDifference</span><span class="o">(</span><span class="kd">final</span> <span class="n">Person</span> <span class="n">other</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">age</span> <span class="o">-</span> <span class="n">other</span><span class="o">.</span><span class="na">age</span><span class="o">;</span>
+
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">&#34;%s - %d&#34;</span><span class="o">,</span> <span class="n">name</span><span class="o">,</span> <span class="n">age</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">printPeople</span><span class="o">(</span>
+            <span class="kd">final</span> <span class="n">String</span> <span class="n">message</span><span class="o">,</span> <span class="kd">final</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span> <span class="n">people</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">message</span><span class="o">);</span>
+        <span class="n">people</span><span class="o">.</span><span class="na">forEach</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">::</span><span class="n">println</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">final</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span> <span class="n">people</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span>
+                <span class="k">new</span> <span class="n">Person</span><span class="o">(</span><span class="s">&#34;John&#34;</span><span class="o">,</span> <span class="n">20</span><span class="o">),</span>
+                <span class="k">new</span> <span class="n">Person</span><span class="o">(</span><span class="s">&#34;Sara&#34;</span><span class="o">,</span> <span class="n">21</span><span class="o">),</span>
+                <span class="k">new</span> <span class="n">Person</span><span class="o">(</span><span class="s">&#34;Jane&#34;</span><span class="o">,</span> <span class="n">21</span><span class="o">),</span>
+                <span class="k">new</span> <span class="n">Person</span><span class="o">(</span><span class="s">&#34;Greg&#34;</span><span class="o">,</span> <span class="n">35</span><span class="o">));</span>
+
+        <span class="c1">// 按照年龄排序，版本1
+</span><span class="c1"></span>        <span class="n">List</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span> <span class="n">ascendingAge</span> <span class="o">=</span> <span class="n">people</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">sorted</span><span class="o">((</span><span class="n">person1</span><span class="o">,</span> <span class="n">person2</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">person2</span><span class="o">.</span><span class="na">ageDifference</span><span class="o">(</span><span class="n">person1</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="n">toList</span><span class="o">());</span>
+<span class="c1">//        List&lt;Person&gt; ascendingAge = people.stream()
+</span><span class="c1">//                .sorted(Person::ageDifference)
+</span><span class="c1">//                .collect(toList());
+</span><span class="c1"></span>
+        <span class="n">printPeople</span><span class="o">(</span><span class="s">&#34;Sorted in ascending order by age: &#34;</span><span class="o">,</span> <span class="n">ascendingAge</span><span class="o">);</span>
+
+        <span class="c1">// 按照年龄排序，版本2
+</span><span class="c1"></span>        <span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span> <span class="n">compareAscending</span> <span class="o">=</span> <span class="o">(</span><span class="n">person1</span><span class="o">,</span> <span class="n">person2</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">person1</span><span class="o">.</span><span class="na">ageDifference</span><span class="o">(</span><span class="n">person2</span><span class="o">);</span>
+        <span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span> <span class="n">compareDescending</span> <span class="o">=</span> <span class="n">compareAscending</span><span class="o">.</span><span class="na">reversed</span><span class="o">();</span>
+
+        <span class="n">printPeople</span><span class="o">(</span><span class="s">&#34;Sorted in ascending order by age: &#34;</span><span class="o">,</span>
+                <span class="n">people</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">sorted</span><span class="o">(</span><span class="n">compareAscending</span><span class="o">).</span><span class="na">collect</span><span class="o">(</span><span class="n">toList</span><span class="o">()));</span>
+
+        <span class="n">printPeople</span><span class="o">(</span><span class="s">&#34;Sorted in descending order by age: &#34;</span><span class="o">,</span>
+                <span class="n">people</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">sorted</span><span class="o">(</span><span class="n">compareDescending</span><span class="o">).</span><span class="na">collect</span><span class="o">(</span><span class="n">toList</span><span class="o">()));</span>
+
+        <span class="c1">// 按照名字排序
+</span><span class="c1"></span>        <span class="n">printPeople</span><span class="o">(</span><span class="s">&#34;Sorted in ascending order by name: &#34;</span><span class="o">,</span>
+                <span class="n">people</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">sorted</span><span class="o">((</span><span class="n">person1</span><span class="o">,</span> <span class="n">person2</span><span class="o">)</span> <span class="o">-&gt;</span>
+                        <span class="n">person1</span><span class="o">.</span><span class="na">getName</span><span class="o">().</span><span class="na">compareTo</span><span class="o">(</span><span class="n">person2</span><span class="o">.</span><span class="na">getName</span><span class="o">()))</span>
+                        <span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="n">toList</span><span class="o">()));</span>
+
+        <span class="c1">// 最年轻的
+</span><span class="c1"></span>        <span class="n">people</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">min</span><span class="o">(</span><span class="n">Person</span><span class="o">::</span><span class="n">ageDifference</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">ifPresent</span><span class="o">(</span><span class="n">youngest</span> <span class="o">-&gt;</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Youngest: &#34;</span> <span class="o">+</span> <span class="n">youngest</span><span class="o">));</span>
+
+        <span class="c1">// 最年长的
+</span><span class="c1"></span>        <span class="n">people</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">max</span><span class="o">(</span><span class="n">Person</span><span class="o">::</span><span class="n">ageDifference</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">ifPresent</span><span class="o">(</span><span class="n">eldest</span> <span class="o">-&gt;</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Eldest: &#34;</span> <span class="o">+</span> <span class="n">eldest</span><span class="o">));</span>
+
+        <span class="c1">// 多重比较和流式比较
+</span><span class="c1"></span>        <span class="c1">// 按照名字排序①
+</span><span class="c1"></span>        <span class="n">people</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">sorted</span><span class="o">((</span><span class="n">person1</span><span class="o">,</span> <span class="n">person2</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">person1</span><span class="o">.</span><span class="na">getName</span><span class="o">().</span><span class="na">compareTo</span><span class="o">(</span><span class="n">person2</span><span class="o">.</span><span class="na">getName</span><span class="o">()));</span>
+        <span class="c1">// 按照名字排序②
+</span><span class="c1"></span>        <span class="kd">final</span> <span class="n">Function</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">byName</span> <span class="o">=</span> <span class="n">person</span> <span class="o">-&gt;</span> <span class="n">person</span><span class="o">.</span><span class="na">getName</span><span class="o">();</span>
+        <span class="n">people</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">sorted</span><span class="o">(</span><span class="n">comparing</span><span class="o">(</span><span class="n">byName</span><span class="o">));</span>
+
+        <span class="c1">// 按名字和年龄比较
+</span><span class="c1"></span>        <span class="kd">final</span> <span class="n">Function</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">,</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">byAge</span> <span class="o">=</span> <span class="n">person</span> <span class="o">-&gt;</span> <span class="n">person</span><span class="o">.</span><span class="na">getAge</span><span class="o">();</span>
+        <span class="kd">final</span> <span class="n">Function</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">byTheirName</span> <span class="o">=</span> <span class="n">person</span> <span class="o">-&gt;</span> <span class="n">person</span><span class="o">.</span><span class="na">getName</span><span class="o">();</span>
+        <span class="n">printPeople</span><span class="o">(</span><span class="s">&#34;Sorted in ascending order by age and name: &#34;</span><span class="o">,</span>
+                <span class="n">people</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
+                        <span class="o">.</span><span class="na">sorted</span><span class="o">(</span><span class="n">comparing</span><span class="o">(</span><span class="n">byAge</span><span class="o">).</span><span class="na">thenComparing</span><span class="o">(</span><span class="n">byTheirName</span><span class="o">))</span>
+                        <span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="n">toList</span><span class="o">()));</span>
+
+    <span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="比较器comparator中lambda的使用">比较器Comparator中lambda的使用</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">import</span> <span class="nn">java.math.BigDecimal</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Developer</span> <span class="o">{</span>
+
+    <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
+    <span class="n">BigDecimal</span> <span class="n">salary</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">age</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">Developer</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">,</span> <span class="n">BigDecimal</span> <span class="n">salary</span><span class="o">,</span> <span class="kt">int</span> <span class="n">age</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">salary</span> <span class="o">=</span> <span class="n">salary</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">age</span> <span class="o">=</span> <span class="n">age</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">name</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">BigDecimal</span> <span class="nf">getSalary</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">salary</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setSalary</span><span class="o">(</span><span class="n">BigDecimal</span> <span class="n">salary</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">salary</span> <span class="o">=</span> <span class="n">salary</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getAge</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">age</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setAge</span><span class="o">(</span><span class="kt">int</span> <span class="n">age</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">age</span> <span class="o">=</span> <span class="n">age</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="s">&#34;Developer [&#34;</span> <span class="o">+</span>
+                <span class="s">&#34;name=&#39;&#34;</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="sc">&#39;\&#39;&#39;</span> <span class="o">+</span>
+                <span class="s">&#34;, salary=&#34;</span> <span class="o">+</span> <span class="n">salary</span> <span class="o">+</span>
+                <span class="s">&#34;, age=&#34;</span> <span class="o">+</span> <span class="n">age</span> <span class="o">+</span>
+                <span class="sc">&#39;]&#39;</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>典型的比较器示例</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Developer</span><span class="o">&gt;</span> <span class="n">byName</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Developer</span><span class="o">&gt;()</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">compare</span><span class="o">(</span><span class="n">Developer</span> <span class="n">o1</span><span class="o">,</span> <span class="n">Developer</span> <span class="n">o2</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">o1</span><span class="o">.</span><span class="na">getName</span><span class="o">().</span><span class="na">compareTo</span><span class="o">(</span><span class="n">o2</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
+    <span class="o">}</span>
+<span class="o">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>等价的Lambda的方式</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Developer</span><span class="o">&gt;</span> <span class="n">byName</span> <span class="o">=</span>
+    <span class="o">(</span><span class="n">Developer</span> <span class="n">o1</span><span class="o">,</span> <span class="n">Developer</span> <span class="n">o2</span><span class="o">)-&gt;</span><span class="n">o1</span><span class="o">.</span><span class="na">getName</span><span class="o">().</span><span class="na">compareTo</span><span class="o">(</span><span class="n">o2</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>不使用Lambda的排序</strong></p>
+<p>假如我们要通过Developer 对象的年龄进行排序，通常情况下我们使用Collections.sort，new个匿名Comparator 类，类似下面这种：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">import</span> <span class="nn">java.math.BigDecimal</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Collections</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Comparator</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestSorting</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="n">List</span><span class="o">&lt;</span><span class="n">Developer</span><span class="o">&gt;</span> <span class="n">listDevs</span> <span class="o">=</span> <span class="n">getDevelopers</span><span class="o">();</span>
+
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Before Sort&#34;</span><span class="o">);</span>
+        <span class="k">for</span> <span class="o">(</span><span class="n">Developer</span> <span class="n">developer</span> <span class="o">:</span> <span class="n">listDevs</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">developer</span><span class="o">);</span>
+        <span class="o">}</span>
+
+        <span class="c1">//sort by age
+</span><span class="c1"></span>        <span class="n">Collections</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">listDevs</span><span class="o">,</span> <span class="k">new</span> <span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Developer</span><span class="o">&gt;()</span> <span class="o">{</span>
+            <span class="nd">@Override</span>
+            <span class="kd">public</span> <span class="kt">int</span> <span class="nf">compare</span><span class="o">(</span><span class="n">Developer</span> <span class="n">o1</span><span class="o">,</span> <span class="n">Developer</span> <span class="n">o2</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">return</span> <span class="n">o1</span><span class="o">.</span><span class="na">getAge</span><span class="o">()</span> <span class="o">-</span> <span class="n">o2</span><span class="o">.</span><span class="na">getAge</span><span class="o">();</span>
+            <span class="o">}</span>
+        <span class="o">});</span>
+
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;After Sort&#34;</span><span class="o">);</span>
+        <span class="k">for</span> <span class="o">(</span><span class="n">Developer</span> <span class="n">developer</span> <span class="o">:</span> <span class="n">listDevs</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">developer</span><span class="o">);</span>
+        <span class="o">}</span>
+
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Developer</span><span class="o">&gt;</span> <span class="nf">getDevelopers</span><span class="o">()</span> <span class="o">{</span>
+
+        <span class="n">List</span><span class="o">&lt;</span><span class="n">Developer</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Developer</span><span class="o">&gt;();</span>
+
+        <span class="n">result</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Developer</span><span class="o">(</span><span class="s">&#34;ricky&#34;</span><span class="o">,</span> <span class="k">new</span> <span class="n">BigDecimal</span><span class="o">(</span><span class="s">&#34;70000&#34;</span><span class="o">),</span> <span class="n">33</span><span class="o">));</span>
+        <span class="n">result</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Developer</span><span class="o">(</span><span class="s">&#34;alvin&#34;</span><span class="o">,</span> <span class="k">new</span> <span class="n">BigDecimal</span><span class="o">(</span><span class="s">&#34;80000&#34;</span><span class="o">),</span> <span class="n">20</span><span class="o">));</span>
+        <span class="n">result</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Developer</span><span class="o">(</span><span class="s">&#34;jason&#34;</span><span class="o">,</span> <span class="k">new</span> <span class="n">BigDecimal</span><span class="o">(</span><span class="s">&#34;100000&#34;</span><span class="o">),</span> <span class="n">10</span><span class="o">));</span>
+        <span class="n">result</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Developer</span><span class="o">(</span><span class="s">&#34;iris&#34;</span><span class="o">,</span> <span class="k">new</span> <span class="n">BigDecimal</span><span class="o">(</span><span class="s">&#34;170000&#34;</span><span class="o">),</span> <span class="n">55</span><span class="o">));</span>
+
+        <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+
+    <span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>输出结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Before</span> <span class="n">Sort</span>
+<span class="n">Developer</span> <span class="o">[</span><span class="n">name</span><span class="o">=</span><span class="n">ricky</span><span class="o">,</span> <span class="n">salary</span><span class="o">=</span><span class="n">70000</span><span class="o">,</span> <span class="n">age</span><span class="o">=</span><span class="n">33</span><span class="o">]</span>
+<span class="n">Developer</span> <span class="o">[</span><span class="n">name</span><span class="o">=</span><span class="n">alvin</span><span class="o">,</span> <span class="n">salary</span><span class="o">=</span><span class="n">80000</span><span class="o">,</span> <span class="n">age</span><span class="o">=</span><span class="n">20</span><span class="o">]</span>
+<span class="n">Developer</span> <span class="o">[</span><span class="n">name</span><span class="o">=</span><span class="n">jason</span><span class="o">,</span> <span class="n">salary</span><span class="o">=</span><span class="n">100000</span><span class="o">,</span> <span class="n">age</span><span class="o">=</span><span class="n">10</span><span class="o">]</span>
+<span class="n">Developer</span> <span class="o">[</span><span class="n">name</span><span class="o">=</span><span class="n">iris</span><span class="o">,</span> <span class="n">salary</span><span class="o">=</span><span class="n">170000</span><span class="o">,</span> <span class="n">age</span><span class="o">=</span><span class="n">55</span><span class="o">]</span>
+
+<span class="n">After</span> <span class="n">Sort</span>
+<span class="n">Developer</span> <span class="o">[</span><span class="n">name</span><span class="o">=</span><span class="n">jason</span><span class="o">,</span> <span class="n">salary</span><span class="o">=</span><span class="n">100000</span><span class="o">,</span> <span class="n">age</span><span class="o">=</span><span class="n">10</span><span class="o">]</span>
+<span class="n">Developer</span> <span class="o">[</span><span class="n">name</span><span class="o">=</span><span class="n">alvin</span><span class="o">,</span> <span class="n">salary</span><span class="o">=</span><span class="n">80000</span><span class="o">,</span> <span class="n">age</span><span class="o">=</span><span class="n">20</span><span class="o">]</span>
+<span class="n">Developer</span> <span class="o">[</span><span class="n">name</span><span class="o">=</span><span class="n">ricky</span><span class="o">,</span> <span class="n">salary</span><span class="o">=</span><span class="n">70000</span><span class="o">,</span> <span class="n">age</span><span class="o">=</span><span class="n">33</span><span class="o">]</span>
+<span class="n">Developer</span> <span class="o">[</span><span class="n">name</span><span class="o">=</span><span class="n">iris</span><span class="o">,</span> <span class="n">salary</span><span class="o">=</span><span class="n">170000</span><span class="o">,</span> <span class="n">age</span><span class="o">=</span><span class="n">55</span><span class="o">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>当比较规则发生变化时，你需要再次new个匿名Comparator 类：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java">    <span class="c1">//sort by age
+</span><span class="c1"></span>    <span class="n">Collections</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">listDevs</span><span class="o">,</span> <span class="k">new</span> <span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Developer</span><span class="o">&gt;()</span> <span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">int</span> <span class="nf">compare</span><span class="o">(</span><span class="n">Developer</span> <span class="n">o1</span><span class="o">,</span> <span class="n">Developer</span> <span class="n">o2</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">o1</span><span class="o">.</span><span class="na">getAge</span><span class="o">()</span> <span class="o">-</span> <span class="n">o2</span><span class="o">.</span><span class="na">getAge</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">});</span>
+
+    <span class="c1">//sort by name
+</span><span class="c1"></span>    <span class="n">Collections</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">listDevs</span><span class="o">,</span> <span class="k">new</span> <span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Developer</span><span class="o">&gt;()</span> <span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">int</span> <span class="nf">compare</span><span class="o">(</span><span class="n">Developer</span> <span class="n">o1</span><span class="o">,</span> <span class="n">Developer</span> <span class="n">o2</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">o1</span><span class="o">.</span><span class="na">getName</span><span class="o">().</span><span class="na">compareTo</span><span class="o">(</span><span class="n">o2</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
+        <span class="o">}</span>
+    <span class="o">});</span>
+
+    <span class="c1">//sort by salary
+</span><span class="c1"></span>    <span class="n">Collections</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">listDevs</span><span class="o">,</span> <span class="k">new</span> <span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Developer</span><span class="o">&gt;()</span> <span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">int</span> <span class="nf">compare</span><span class="o">(</span><span class="n">Developer</span> <span class="n">o1</span><span class="o">,</span> <span class="n">Developer</span> <span class="n">o2</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">o1</span><span class="o">.</span><span class="na">getSalary</span><span class="o">().</span><span class="na">compareTo</span><span class="o">(</span><span class="n">o2</span><span class="o">.</span><span class="na">getSalary</span><span class="o">());</span>
+        <span class="o">}</span>
+    <span class="o">});</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这样也可以，不过你会不会觉得这样有点怪，因为其实不同的只有一行代码而已，但是却需要重复写很多代码？</p>
+<p><strong>通过lambda进行排序</strong></p>
+<p>在java8中，List接口直接提供了排序方法， 所以你不需要使用Collections.sort</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java">    <span class="c1">//List.sort() since Java 8
+</span><span class="c1"></span>    <span class="n">listDevs</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="k">new</span> <span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Developer</span><span class="o">&gt;()</span> <span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">int</span> <span class="nf">compare</span><span class="o">(</span><span class="n">Developer</span> <span class="n">o1</span><span class="o">,</span> <span class="n">Developer</span> <span class="n">o2</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">o2</span><span class="o">.</span><span class="na">getAge</span><span class="o">()</span> <span class="o">-</span> <span class="n">o1</span><span class="o">.</span><span class="na">getAge</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">});</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Lambda 示例</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">import</span> <span class="nn">java.math.BigDecimal</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestSorting</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="n">List</span><span class="o">&lt;</span><span class="n">Developer</span><span class="o">&gt;</span> <span class="n">listDevs</span> <span class="o">=</span> <span class="n">getDevelopers</span><span class="o">();</span>
+
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Before Sort&#34;</span><span class="o">);</span>
+        <span class="k">for</span> <span class="o">(</span><span class="n">Developer</span> <span class="n">developer</span> <span class="o">:</span> <span class="n">listDevs</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">developer</span><span class="o">);</span>
+        <span class="o">}</span>
+
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;After Sort&#34;</span><span class="o">);</span>
+
+        <span class="c1">//lambda here!
+</span><span class="c1"></span>        <span class="n">listDevs</span><span class="o">.</span><span class="na">sort</span><span class="o">((</span><span class="n">Developer</span> <span class="n">o1</span><span class="o">,</span> <span class="n">Developer</span> <span class="n">o2</span><span class="o">)-&gt;</span><span class="n">o1</span><span class="o">.</span><span class="na">getAge</span><span class="o">()-</span><span class="n">o2</span><span class="o">.</span><span class="na">getAge</span><span class="o">());</span>
+
+        <span class="c1">//java 8 only, lambda also, to print the List
+</span><span class="c1"></span>        <span class="n">listDevs</span><span class="o">.</span><span class="na">forEach</span><span class="o">((</span><span class="n">developer</span><span class="o">)-&gt;</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">developer</span><span class="o">));</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Developer</span><span class="o">&gt;</span> <span class="nf">getDevelopers</span><span class="o">()</span> <span class="o">{</span>
+
+        <span class="n">List</span><span class="o">&lt;</span><span class="n">Developer</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Developer</span><span class="o">&gt;();</span>
+
+        <span class="n">result</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Developer</span><span class="o">(</span><span class="s">&#34;ricky&#34;</span><span class="o">,</span> <span class="k">new</span> <span class="n">BigDecimal</span><span class="o">(</span><span class="s">&#34;70000&#34;</span><span class="o">),</span> <span class="n">33</span><span class="o">));</span>
+        <span class="n">result</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Developer</span><span class="o">(</span><span class="s">&#34;alvin&#34;</span><span class="o">,</span> <span class="k">new</span> <span class="n">BigDecimal</span><span class="o">(</span><span class="s">&#34;80000&#34;</span><span class="o">),</span> <span class="n">20</span><span class="o">));</span>
+        <span class="n">result</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Developer</span><span class="o">(</span><span class="s">&#34;jason&#34;</span><span class="o">,</span> <span class="k">new</span> <span class="n">BigDecimal</span><span class="o">(</span><span class="s">&#34;100000&#34;</span><span class="o">),</span> <span class="n">10</span><span class="o">));</span>
+        <span class="n">result</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Developer</span><span class="o">(</span><span class="s">&#34;iris&#34;</span><span class="o">,</span> <span class="k">new</span> <span class="n">BigDecimal</span><span class="o">(</span><span class="s">&#34;170000&#34;</span><span class="o">),</span> <span class="n">55</span><span class="o">));</span>
+
+        <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+
+    <span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>输出结果:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Before Sort
+Developer [name=ricky, salary=70000, age=33]
+Developer [name=alvin, salary=80000, age=20]
+Developer [name=jason, salary=100000, age=10]
+Developer [name=iris, salary=170000, age=55]
+
+After Sort
+Developer [name=jason, salary=100000, age=10]
+Developer [name=alvin, salary=80000, age=20]
+Developer [name=ricky, salary=70000, age=33]
+Developer [name=iris, salary=170000, age=55]
+</code></pre></td></tr></table>
+</div>
+</div><p>更多的Lambda 例子</p>
+<p>根据年龄</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java">    <span class="c1">//sort by age
+</span><span class="c1"></span>    <span class="n">Collections</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">listDevs</span><span class="o">,</span> <span class="k">new</span> <span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Developer</span><span class="o">&gt;()</span> <span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">int</span> <span class="nf">compare</span><span class="o">(</span><span class="n">Developer</span> <span class="n">o1</span><span class="o">,</span> <span class="n">Developer</span> <span class="n">o2</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">o1</span><span class="o">.</span><span class="na">getAge</span><span class="o">()</span> <span class="o">-</span> <span class="n">o2</span><span class="o">.</span><span class="na">getAge</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">});</span>
+
+    <span class="c1">//lambda
+</span><span class="c1"></span>    <span class="n">listDevs</span><span class="o">.</span><span class="na">sort</span><span class="o">((</span><span class="n">Developer</span> <span class="n">o1</span><span class="o">,</span> <span class="n">Developer</span> <span class="n">o2</span><span class="o">)-&gt;</span><span class="n">o1</span><span class="o">.</span><span class="na">getAge</span><span class="o">()-</span><span class="n">o2</span><span class="o">.</span><span class="na">getAge</span><span class="o">());</span>
+
+    <span class="c1">//lambda, valid, parameter type is optional
+</span><span class="c1"></span>    <span class="n">listDevs</span><span class="o">.</span><span class="na">sort</span><span class="o">((</span><span class="n">o1</span><span class="o">,</span> <span class="n">o2</span><span class="o">)-&gt;</span><span class="n">o1</span><span class="o">.</span><span class="na">getAge</span><span class="o">()-</span><span class="n">o2</span><span class="o">.</span><span class="na">getAge</span><span class="o">());</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>根据名字</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java">    <span class="c1">//sort by name
+</span><span class="c1"></span>    <span class="n">Collections</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">listDevs</span><span class="o">,</span> <span class="k">new</span> <span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Developer</span><span class="o">&gt;()</span> <span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">int</span> <span class="nf">compare</span><span class="o">(</span><span class="n">Developer</span> <span class="n">o1</span><span class="o">,</span> <span class="n">Developer</span> <span class="n">o2</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">o1</span><span class="o">.</span><span class="na">getName</span><span class="o">().</span><span class="na">compareTo</span><span class="o">(</span><span class="n">o2</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
+        <span class="o">}</span>
+    <span class="o">});</span>
+
+    <span class="c1">//lambda
+</span><span class="c1"></span>    <span class="n">listDevs</span><span class="o">.</span><span class="na">sort</span><span class="o">((</span><span class="n">Developer</span> <span class="n">o1</span><span class="o">,</span> <span class="n">Developer</span> <span class="n">o2</span><span class="o">)-&gt;</span><span class="n">o1</span><span class="o">.</span><span class="na">getName</span><span class="o">().</span><span class="na">compareTo</span><span class="o">(</span><span class="n">o2</span><span class="o">.</span><span class="na">getName</span><span class="o">()));</span>
+
+    <span class="c1">//lambda
+</span><span class="c1"></span>    <span class="n">listDevs</span><span class="o">.</span><span class="na">sort</span><span class="o">((</span><span class="n">o1</span><span class="o">,</span> <span class="n">o2</span><span class="o">)-&gt;</span><span class="n">o1</span><span class="o">.</span><span class="na">getName</span><span class="o">().</span><span class="na">compareTo</span><span class="o">(</span><span class="n">o2</span><span class="o">.</span><span class="na">getName</span><span class="o">()));</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>根据薪水</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java">    <span class="c1">//sort by salary
+</span><span class="c1"></span>    <span class="n">Collections</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">listDevs</span><span class="o">,</span> <span class="k">new</span> <span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Developer</span><span class="o">&gt;()</span> <span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">int</span> <span class="nf">compare</span><span class="o">(</span><span class="n">Developer</span> <span class="n">o1</span><span class="o">,</span> <span class="n">Developer</span> <span class="n">o2</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">o1</span><span class="o">.</span><span class="na">getSalary</span><span class="o">().</span><span class="na">compareTo</span><span class="o">(</span><span class="n">o2</span><span class="o">.</span><span class="na">getSalary</span><span class="o">());</span>
+        <span class="o">}</span>
+    <span class="o">});</span>
+
+    <span class="c1">//lambda
+</span><span class="c1"></span>    <span class="n">listDevs</span><span class="o">.</span><span class="na">sort</span><span class="o">((</span><span class="n">Developer</span> <span class="n">o1</span><span class="o">,</span> <span class="n">Developer</span> <span class="n">o2</span><span class="o">)-&gt;</span><span class="n">o1</span><span class="o">.</span><span class="na">getSalary</span><span class="o">().</span><span class="na">compareTo</span><span class="o">(</span><span class="n">o2</span><span class="o">.</span><span class="na">getSalary</span><span class="o">()));</span>
+
+    <span class="c1">//lambda
+</span><span class="c1"></span>    <span class="n">listDevs</span><span class="o">.</span><span class="na">sort</span><span class="o">((</span><span class="n">o1</span><span class="o">,</span> <span class="n">o2</span><span class="o">)-&gt;</span><span class="n">o1</span><span class="o">.</span><span class="na">getSalary</span><span class="o">().</span><span class="na">compareTo</span><span class="o">(</span><span class="n">o2</span><span class="o">.</span><span class="na">getSalary</span><span class="o">()))</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>倒序</p>
+<ul>
+<li>正常排序</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java">    <span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Developer</span><span class="o">&gt;</span> <span class="n">salaryComparator</span> <span class="o">=</span> <span class="o">(</span><span class="n">o1</span><span class="o">,</span> <span class="n">o2</span><span class="o">)-&gt;</span><span class="n">o1</span><span class="o">.</span><span class="na">getSalary</span><span class="o">().</span><span class="na">compareTo</span><span class="o">(</span><span class="n">o2</span><span class="o">.</span><span class="na">getSalary</span><span class="o">());</span>
+    <span class="n">listDevs</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">salaryComparator</span><span class="o">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>倒序</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java">    <span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Developer</span><span class="o">&gt;</span> <span class="n">salaryComparator</span> <span class="o">=</span> <span class="o">(</span><span class="n">o1</span><span class="o">,</span> <span class="n">o2</span><span class="o">)-&gt;</span><span class="n">o1</span><span class="o">.</span><span class="na">getSalary</span><span class="o">().</span><span class="na">compareTo</span><span class="o">(</span><span class="n">o2</span><span class="o">.</span><span class="na">getSalary</span><span class="o">());</span>
+    <span class="n">listDevs</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">salaryComparator</span><span class="o">.</span><span class="na">reversed</span><span class="o">());</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="拓展">拓展</h3>
+<p><strong>匿名内部类</strong></p>
+<p>所谓匿名内部类，是指可以利用内部类创建没有名称的对象，它一步完成了声明内部类和创建该类的一个对象，并利用该对象访问到类里面的成员.</p>
+<p>下面看一段代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">InnerclassTest</span> <span class="o">{</span>  <span class="c1">//外部类
+</span><span class="c1"></span>    
+    <span class="n">String</span> <span class="n">name</span><span class="o">=</span><span class="s">&#34;黄林&#34;</span><span class="o">;</span>
+  
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span> <span class="o">[]</span><span class="n">args</span><span class="o">){</span>
+      <span class="o">(</span>
+              <span class="k">new</span> <span class="n">InnerclassTest</span><span class="o">(){</span>  <span class="c1">//匿名内部类开始
+</span><span class="c1"></span>                  <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="n">String</span> <span class="n">n</span><span class="o">){</span>
+                      <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">n</span><span class="o">;</span>
+                      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;内部类---姓名：&#34;</span><span class="o">+</span><span class="n">name</span><span class="o">);</span>
+                  <span class="o">}</span>
+              <span class="o">}</span>
+              <span class="o">).</span><span class="na">setName</span><span class="o">(</span><span class="s">&#34;王佳&#34;</span><span class="o">);</span>      <span class="c1">//匿名内部类结束
+</span><span class="c1"></span>  <span class="o">}</span> 
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>运行结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">内部类---姓名：王佳
+</code></pre></td></tr></table>
+</div>
+</div><p>这里的内部类是</p>
+<ol>
+<li>
+<p>直接用外部类InnerclassTest的名字new一个对象，</p>
+</li>
+<li>
+<p>并紧接着定义类体的，这个内部类没有自己的名字，甚至将创建对象的工作直接交给了其父类InnerclassTest（在这里InnerclassTest既是一个外部类，也是匿名内部类的父类），</p>
+</li>
+<li>
+<p>在匿名内部类中重新给其父类成员name赋值，所以最后的结果是匿名内部类中所给的值将其父类成员变量的初始值给覆盖了。</p>
+</li>
+</ol>
+<p>匿名内部类不需要class关键字，自然也不需要public，private等修饰，它没有构造方法，一般用来补充内部类中没有定义的内容，或者实现外部接口或其抽象父类中的抽象方法，这样使代码更加简短。比如上面的代码就为其外部类中的成员name属性添加了setName()方法，并利用匿名内部类对象调用该方法并为name赋值。</p>
+<p>over。</p>
+<p>更详细的可以通过下方参考链接看原文，此处只是简单的描述及理解。</p>
+<h3 id="原文">原文</h3>
+<p>《Functional Programming in Java: Harnessing the Power Of Java 8 Lambda Expressions》的第三章节（网上的一些博客网站能找到翻译）</p>
+<p><a href="https://blog.csdn.net/hst_gogogo/article/details/82798673" target="_blank" rel="noopener noreffer">匿名内部类</a></p>
+<p><a href="https://www.cnblogs.com/skywang12345/p/3324788.html" target="_blank" rel="noopener noreffer">Java 中 Comparable 和 Comparator 比较</a></p>
+<p><a href="https://www.baeldung.com/java-comparator-comparable" target="_blank" rel="noopener noreffer">Comparator and Comparable in Java</a></p>
+<p><a href="https://blog.csdn.net/u014042066/article/details/76248692" target="_blank" rel="noopener noreffer">java8-Lambda中比较器Comparator的使用</a></p>
+<p><a href="https://cloud.tencent.com/developer/article/1771454" target="_blank" rel="noopener noreffer">Java 8 Lambda : Comparator 示例</a></p>
+<p><a href="https://mkyong.com/java8/java-8-lambda-comparator-example/" target="_blank" rel="noopener noreffer">Java 8 Lambda : Comparator example</a></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2021-12-31</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/comparator%E4%B8%8Elambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://kelo7.github.io/comparator%E4%B8%8Elambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" data-title="Comparator与lambda表达式" data-via="xxxx" data-hashtags="Java,Comparator,lambda"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://kelo7.github.io/comparator%E4%B8%8Elambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" data-hashtag="Java"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://kelo7.github.io/comparator%E4%B8%8Elambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" data-title="Comparator与lambda表达式" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://kelo7.github.io/comparator%E4%B8%8Elambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" data-title="Comparator与lambda表达式"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://kelo7.github.io/comparator%E4%B8%8Elambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" data-title="Comparator与lambda表达式"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://kelo7.github.io/comparator%E4%B8%8Elambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" data-title="Comparator与lambda表达式" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://kelo7.github.io/comparator%E4%B8%8Elambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" data-title="Comparator与lambda表达式" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://kelo7.github.io/comparator%E4%B8%8Elambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" data-title="Comparator与lambda表达式"><i class="fab fa-evernote fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/java/">Java</a>,&nbsp;<a href="/tags/comparator/">Comparator</a>,&nbsp;<a href="/tags/lambda/">lambda</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/%E5%90%88%E5%B9%B6k%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/" class="prev" rel="prev" title="合并k个有序链表"><i class="fas fa-angle-left fa-fw"></i>合并k个有序链表</a>
+            <a href="/%E5%8D%95%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACk%E4%B8%AA%E8%8A%82%E7%82%B9/" class="next" rel="next" title="单链表的倒数第k个节点">单链表的倒数第k个节点<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.76.5">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">kelo</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

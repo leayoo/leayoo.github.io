@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>合并k个有序链表 - kelo&#39;s personal blog</title><meta name="Description" content="a personal blog"><meta property="og:title" content="合并k个有序链表" />
+<meta property="og:description" content="合并k个有序链表的思路与代码（包括二叉堆与优先级队列）" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kelo7.github.io/%E5%90%88%E5%B9%B6k%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/" />
+<meta property="og:image" content="https://kelo7.github.io/logo.png"/>
+<meta property="article:published_time" content="2021-12-31T18:45:03+08:00" />
+<meta property="article:modified_time" content="2021-12-31T18:45:03+08:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://kelo7.github.io/logo.png"/>
+
+<meta name="twitter:title" content="合并k个有序链表"/>
+<meta name="twitter:description" content="合并k个有序链表的思路与代码（包括二叉堆与优先级队列）"/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://kelo7.github.io/%E5%90%88%E5%B9%B6k%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/" /><link rel="prev" href="https://kelo7.github.io/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E9%93%BE%E8%A1%A8/" /><link rel="next" href="https://kelo7.github.io/comparator%E4%B8%8Elambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "合并k个有序链表",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/kelo7.github.io\/%E5%90%88%E5%B9%B6k%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8\/"
+        },"genre": "posts","keywords": "力扣刷题, 每日一题, 链表","wordcount":  4996 ,
+        "url": "https:\/\/kelo7.github.io\/%E5%90%88%E5%B9%B6k%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8\/","datePublished": "2021-12-31T18:45:03+08:00","dateModified": "2021-12-31T18:45:03+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "kelo"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="kelo&#39;s personal blog">Kelo&#39;s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="kelo&#39;s personal blog">Kelo&#39;s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">合并k个有序链表</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>kelo</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/leetcode/"><i class="far fa-folder fa-fw"></i>leetcode</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-12-31">2021-12-31</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 4996 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 10 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#合并k个有序链表">合并k个有序链表</a>
+          <ul>
+            <li><a href="#问题"><strong>问题</strong></a></li>
+            <li><a href="#思路"><strong>思路</strong></a></li>
+            <li><a href="#代码"><strong>代码</strong></a></li>
+            <li><a href="#拓展"><strong>拓展</strong></a>
+              <ul>
+                <li><a href="#二叉堆与优先级队列概念">二叉堆与优先级队列概念</a></li>
+                <li><a href="#优先级队列实现">优先级队列实现</a>
+                  <ul>
+                    <li><a href="#实现-swim-和-sink"><strong>实现 swim 和 sink</strong></a></li>
+                    <li><a href="#实现-delmax-和-insert"><strong>实现 delMax 和 insert</strong></a></li>
+                  </ul>
+                </li>
+                <li><a href="#java中使用优先级队列priorityqueue">java中使用优先级队列（PriorityQueue）</a></li>
+              </ul>
+            </li>
+            <li><a href="#原文"><strong>原文</strong></a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://gitee.com/li_yue1999/picture-of-note/raw/master/img/wallhaven-pk52g3.jpg"
+        data-srcset="https://gitee.com/li_yue1999/picture-of-note/raw/master/img/wallhaven-pk52g3.jpg, https://gitee.com/li_yue1999/picture-of-note/raw/master/img/wallhaven-pk52g3.jpg 1.5x, https://gitee.com/li_yue1999/picture-of-note/raw/master/img/wallhaven-pk52g3.jpg 2x"
+        data-sizes="auto"
+        alt="https://gitee.com/li_yue1999/picture-of-note/raw/master/img/wallhaven-pk52g3.jpg"
+        title="General 2500x1112 artwork digital art nature clouds trees" /></p>
+<h3 id="合并k个有序链表">合并k个有序链表</h3>
+<h4 id="问题"><strong>问题</strong></h4>
+<p>给你一个链表数组，每个链表都已经按升序排列。</p>
+<p>请你将所有链表合并到一个升序链表中，返回合并后的链表。</p>
+<h4 id="思路"><strong>思路</strong></h4>
+<p>合并 <code>k</code> 个有序链表的逻辑类似合并两个有序链表，难点在于，<u>如何快速得到 <code>k</code> 个节点中的最小节点</u>，接到结果链表上？</p>
+<p>用到 **优先级队列（二叉堆）**这种数据结构，把链表节点放入一个最小堆，就可以每次获得 <code>k</code> 个节点中的最小节点</p>
+<ol>
+<li><strong>初始化</strong>：初始化虚拟头结点，初始化p指向虚拟头结点</li>
+<li><strong>构造优先级队列</strong>：构造最小堆（Comparator如何设置）</li>
+<li><strong>结点加入最小堆</strong>：将k个链表的头结点加入最小堆（使用add方法）</li>
+<li><strong>获取最小节点并加入新链表，p指针和最小节点处指针后移动</strong>：如果优先级队列不为空，则获取最小结点，接到结果链表中（使用poll方法获取结点，接到后p指针后移），获取完后将节点后移，并加入到最小堆中。</li>
+<li><strong>结束</strong>：返回<code>dummy.next</code></li>
+</ol>
+<h4 id="代码"><strong>代码</strong></h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="cm">/**
+</span><span class="cm"> * Definition for singly-linked list.
+</span><span class="cm"> * public class ListNode {
+</span><span class="cm"> *     int val;
+</span><span class="cm"> *     ListNode next;
+</span><span class="cm"> *     ListNode() {}
+</span><span class="cm"> *     ListNode(int val) { this.val = val; }
+</span><span class="cm"> *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+</span><span class="cm"> * }
+</span><span class="cm"> */</span>
+<span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">ListNode</span> <span class="nf">mergeKLists</span><span class="o">(</span><span class="n">ListNode</span><span class="o">[]</span> <span class="n">lists</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">lists</span><span class="o">.</span><span class="na">length</span> <span class="o">==</span> <span class="n">0</span><span class="o">)</span> <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="c1">// 虚拟头结点
+</span><span class="c1"></span>        <span class="n">ListNode</span> <span class="n">dummy</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ListNode</span><span class="o">(-</span><span class="n">1</span><span class="o">);</span>
+        <span class="n">ListNode</span> <span class="n">p</span> <span class="o">=</span> <span class="n">dummy</span><span class="o">;</span>
+        <span class="c1">// 构建优先级队列，最小堆
+</span><span class="c1"></span>        <span class="n">PriorityQueue</span><span class="o">&lt;</span><span class="n">ListNode</span><span class="o">&gt;</span> <span class="n">pq</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PriorityQueue</span><span class="o">&lt;&gt;(</span><span class="n">lists</span><span class="o">.</span><span class="na">length</span><span class="o">,</span> <span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="n">a</span><span class="o">.</span><span class="na">val</span> <span class="o">-</span> <span class="n">b</span><span class="o">.</span><span class="na">val</span><span class="o">));</span>
+        <span class="c1">// 将k个链表的头结点加入最小堆
+</span><span class="c1"></span>        <span class="k">for</span><span class="o">(</span><span class="n">ListNode</span> <span class="n">head</span> <span class="o">:</span> <span class="n">lists</span><span class="o">){</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">head</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">){</span>
+                <span class="n">pq</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">head</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+
+        <span class="k">while</span><span class="o">(!</span><span class="n">pq</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">()){</span>
+            <span class="c1">// 获取最小结点，接到结果链表中
+</span><span class="c1"></span>            <span class="n">ListNode</span> <span class="n">node</span> <span class="o">=</span> <span class="n">pq</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span>
+            <span class="n">p</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">node</span><span class="o">;</span>
+            <span class="c1">// p后移
+</span><span class="c1"></span>            <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+
+            <span class="c1">// 获取下一个结点并加入优先级队列中
+</span><span class="c1"></span>            <span class="k">if</span> <span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">next</span><span class="o">!=</span><span class="kc">null</span><span class="o">){</span>
+                <span class="n">pq</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">next</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+
+        <span class="k">return</span> <span class="n">dummy</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="拓展"><strong>拓展</strong></h4>
+<h5 id="二叉堆与优先级队列概念">二叉堆与优先级队列概念</h5>
+<p>Q1：二叉堆是什么，二叉堆和二叉树是什么关系？</p>
+<p>二叉堆在逻辑上其实是一种特殊的二叉树（完全二叉树），只不过<strong>存储在数组里</strong>。一般的链表二叉树，我们有操作节点的指针，而在数组里，我们把数组索引作为指针。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kt">int</span> <span class="nf">parent</span><span class="o">(</span><span class="kt">int</span> <span class="n">root</span><span class="o">){</span>
+    <span class="k">return</span> <span class="n">root</span> <span class="o">/</span> <span class="n">2</span><span class="o">;</span>
+<span class="o">}</span>
+<span class="kt">int</span> <span class="nf">left</span><span class="o">(</span><span class="kt">int</span> <span class="n">root</span><span class="o">){</span>
+    <span class="k">return</span> <span class="n">root</span> <span class="o">*</span> <span class="n">2</span><span class="o">;</span>
+<span class="o">}</span>
+<span class="kt">int</span> <span class="nf">right</span><span class="o">(</span><span class="kt">int</span> <span class="n">root</span><span class="o">){</span>
+    <span class="k">return</span> <span class="n">root</span> <span class="o">*</span> <span class="n">2</span> <span class="o">+</span> <span class="n">1</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>画个图你立即就能理解了，比如 <code>arr</code> 是一个字符数组，注意数组的第一个索引 0 空着不用：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://gitee.com/li_yue1999/picture-of-note/raw/master/img/1.png"
+        data-srcset="https://gitee.com/li_yue1999/picture-of-note/raw/master/img/1.png, https://gitee.com/li_yue1999/picture-of-note/raw/master/img/1.png 1.5x, https://gitee.com/li_yue1999/picture-of-note/raw/master/img/1.png 2x"
+        data-sizes="auto"
+        alt="https://gitee.com/li_yue1999/picture-of-note/raw/master/img/1.png"
+        title="img" /></p>
+<p>你看到了，因为这棵二叉树是「完全二叉树」，所以把 <code>arr[1]</code> 作为整棵树的根的话，每个节点的父节点和左右孩子的索引都可以通过简单的运算得到，这就是二叉堆设计的一个巧妙之处。</p>
+<p>二叉堆还分为最大堆和最小堆。<strong>最大堆的性质是：每个节点都大于等于它的两个子节点</strong>。类似的，最小堆的性质是：每个节点都小于等于它的子节点。</p>
+<p>对于一个最大堆，根据其性质，显然堆顶，也就是 <code>arr[1]</code> 一定是所有元素中最大的元素。</p>
+<p>Q2：二叉堆操作</p>
+<p><code>sink</code>（下沉）和<code>swim</code>（上浮）</p>
+<p>Q3：二叉堆的应用</p>
+<ol>
+<li>堆排序</li>
+<li>优先级队列</li>
+</ol>
+<p>Q4：什么是优先级队列</p>
+<p>优先级队列这种数据结构有一个很有用的功能，你插入或者删除元素的时候，元素会自动排序，这底层的原理就是二叉堆的操作。</p>
+<p>数据结构的功能无非增删查该，优先级队列有两个主要 API，分别是 <code>insert</code> 插入一个元素和 <code>delMax</code> 删除最大元素（如果底层用最小堆，那么就是 <code>delMin</code>）。</p>
+<h5 id="优先级队列实现">优先级队列实现</h5>
+<p>下面我们实现一个简化的优先级队列，先看下代码框架：</p>
+<blockquote>
+<p>PS：这里用到 Java 的泛型，<code>Key</code> 可以是任何一种可比较大小的数据类型，比如 Integer 等类型。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MaxPQ</span>
+    <span class="o">&lt;</span><span class="n">Key</span> <span class="kd">extends</span> <span class="n">Comparable</span><span class="o">&lt;</span><span class="n">Key</span><span class="o">&gt;&gt;</span> <span class="o">{</span>
+    <span class="c1">// 存储元素的数组
+</span><span class="c1"></span>    <span class="kd">private</span> <span class="n">Key</span><span class="o">[]</span> <span class="n">pq</span><span class="o">;</span>
+    <span class="c1">// 当前 Priority Queue 中的元素个数
+</span><span class="c1"></span>    <span class="kd">private</span> <span class="kt">int</span> <span class="n">N</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">MaxPQ</span><span class="o">(</span><span class="kt">int</span> <span class="n">cap</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// 索引 0 不用，所以多分配一个空间
+</span><span class="c1"></span>        <span class="n">pq</span> <span class="o">=</span> <span class="o">(</span><span class="n">Key</span><span class="o">[])</span> <span class="k">new</span> <span class="n">Comparable</span><span class="o">[</span><span class="n">cap</span> <span class="o">+</span> <span class="n">1</span><span class="o">];</span>
+    <span class="o">}</span>
+
+    <span class="cm">/* 返回当前队列中最大元素 */</span>
+    <span class="kd">public</span> <span class="n">Key</span> <span class="nf">max</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">pq</span><span class="o">[</span><span class="n">1</span><span class="o">];</span>
+    <span class="o">}</span>
+
+    <span class="cm">/* 插入元素 e */</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">insert</span><span class="o">(</span><span class="n">Key</span> <span class="n">e</span><span class="o">)</span> <span class="o">{...}</span>
+
+    <span class="cm">/* 删除并返回当前队列中最大元素 */</span>
+    <span class="kd">public</span> <span class="n">Key</span> <span class="nf">delMax</span><span class="o">()</span> <span class="o">{...}</span>
+
+    <span class="cm">/* 上浮第 k 个元素，以维护最大堆性质 */</span>
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">swim</span><span class="o">(</span><span class="kt">int</span> <span class="n">k</span><span class="o">)</span> <span class="o">{...}</span>
+
+    <span class="cm">/* 下沉第 k 个元素，以维护最大堆性质 */</span>
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">sink</span><span class="o">(</span><span class="kt">int</span> <span class="n">k</span><span class="o">)</span> <span class="o">{...}</span>
+
+    <span class="cm">/* 交换数组的两个元素 */</span>
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">exch</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">,</span> <span class="kt">int</span> <span class="n">j</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Key</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">pq</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+        <span class="n">pq</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">pq</span><span class="o">[</span><span class="n">j</span><span class="o">];</span>
+        <span class="n">pq</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">temp</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="cm">/* pq[i] 是否比 pq[j] 小？ */</span>
+    <span class="kd">private</span> <span class="kt">boolean</span> <span class="nf">less</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">,</span> <span class="kt">int</span> <span class="n">j</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">pq</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">compareTo</span><span class="o">(</span><span class="n">pq</span><span class="o">[</span><span class="n">j</span><span class="o">])</span> <span class="o">&lt;</span> <span class="n">0</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="cm">/* 还有 left, right, parent 三个方法（看上文）*/</span>
+<span class="o">}</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><p>空出来的四个方法（<code>insert</code>,<code>delMax</code>,<code>sink</code>,<code>swim</code>）是二叉堆和优先级队列的奥妙所在，下面用图文来逐个理解。</p>
+<h6 id="实现-swim-和-sink"><strong>实现 swim 和 sink</strong></h6>
+<p>为什么要有上浮 <code>swim</code> 和下沉 <code>sink</code> 的操作呢？为了维护堆结构。</p>
+<p>我们要讲的是最大堆，每个节点都比它的两个子节点大，但是在插入元素和删除元素时，难免破坏堆的性质，这就需要通过这两个操作来恢复堆的性质了。</p>
+<p>对于最大堆，会破坏堆性质的有有两种情况：</p>
+<blockquote>
+<ol>
+<li>如果某个节点 A 比它的子节点（中的一个）小，那么 A 就不配做父节点，应该下去，下面那个更大的节点上来做父节点，这就是对 A 进行<strong>下沉</strong>。</li>
+<li>如果某个节点 A 比它的父节点大，那么 A 不应该做子节点，应该把父节点换下来，自己去做父节点，这就是对 A 的<strong>上浮</strong>。</li>
+</ol>
+</blockquote>
+<p>当然，错位的节点 A 可能要上浮（或下沉）很多次，才能到达正确的位置，恢复堆的性质。所以代码中肯定有一个 <code>while</code> 循环。</p>
+<p>那么，这两个操作不是互逆吗，所以上浮的操作一定能用下沉来完成，为什么我还要费劲写两个方法？</p>
+<p>是的，操作是互逆等价的，但是最终我们的操作只会在堆底和堆顶进行（等会讲原因），显然堆底的「错位」元素需要上浮，堆顶的「错位」元素需要下沉。</p>
+<p><strong>上浮的代码实现：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kt">void</span> <span class="nf">swim</span><span class="o">(</span><span class="kt">int</span> <span class="n">k</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// 如果浮到堆顶，就不能再上浮了
+</span><span class="c1"></span>    <span class="k">while</span> <span class="o">(</span><span class="n">k</span> <span class="o">&gt;</span> <span class="n">1</span> <span class="o">&amp;&amp;</span> <span class="n">less</span><span class="o">(</span><span class="n">parent</span><span class="o">(</span><span class="n">k</span><span class="o">),</span> <span class="n">k</span><span class="o">))</span> <span class="o">{</span>
+        <span class="c1">// 如果第 k 个元素比上层大
+</span><span class="c1"></span>        <span class="c1">// 将 k 换上去
+</span><span class="c1"></span>        <span class="n">exch</span><span class="o">(</span><span class="n">parent</span><span class="o">(</span><span class="n">k</span><span class="o">),</span> <span class="n">k</span><span class="o">);</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="n">parent</span><span class="o">(</span><span class="n">k</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>下沉的代码实现：</strong></p>
+<p>下沉比上浮略微复杂一点，因为<u>上浮某个节点 A，只需要 A 和其父节点比较大小即可</u>；但是<u>下沉某个节点 A，需要 A 和其<strong>两个子节点</strong>比较大小</u>，如果 A 不是最大的就需要调整位置，要把较大的那个子节点和 A 交换。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kt">void</span> <span class="nf">sink</span><span class="o">(</span><span class="kt">int</span> <span class="n">k</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// 如果沉到堆底，就沉不下去了
+</span><span class="c1"></span>    <span class="k">while</span> <span class="o">(</span><span class="n">left</span><span class="o">(</span><span class="n">k</span><span class="o">)</span> <span class="o">&lt;=</span> <span class="n">N</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// 先假设左边节点较大
+</span><span class="c1"></span>        <span class="kt">int</span> <span class="n">older</span> <span class="o">=</span> <span class="n">left</span><span class="o">(</span><span class="n">k</span><span class="o">);</span>
+        <span class="c1">// 如果右边节点存在，比一下大小确定older
+</span><span class="c1"></span>        <span class="k">if</span> <span class="o">(</span><span class="n">right</span><span class="o">(</span><span class="n">k</span><span class="o">)</span> <span class="o">&lt;=</span> <span class="n">N</span> <span class="o">&amp;&amp;</span> <span class="n">less</span><span class="o">(</span><span class="n">older</span><span class="o">,</span> <span class="n">right</span><span class="o">(</span><span class="n">k</span><span class="o">)))</span>
+            <span class="n">older</span> <span class="o">=</span> <span class="n">right</span><span class="o">(</span><span class="n">k</span><span class="o">);</span>
+        <span class="c1">// 结点 k 比俩孩子都大，就不必下沉了
+</span><span class="c1"></span>        <span class="k">if</span> <span class="o">(</span><span class="n">less</span><span class="o">(</span><span class="n">older</span><span class="o">,</span> <span class="n">k</span><span class="o">))</span> <span class="k">break</span><span class="o">;</span>
+        <span class="c1">// 否则，不符合最大堆的结构，下沉 k 结点
+</span><span class="c1"></span>        <span class="n">exch</span><span class="o">(</span><span class="n">k</span><span class="o">,</span> <span class="n">older</span><span class="o">);</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="n">older</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><p>至此，二叉堆的主要操作就讲完了，一点都不难吧，代码加起来也就十行。明白了 <code>sink</code> 和 <code>swim</code> 的行为，下面就可以实现优先级队列了。</p>
+<h6 id="实现-delmax-和-insert"><strong>实现 delMax 和 insert</strong></h6>
+<p>这两个方法就是建立在 <code>swim</code> 和 <code>sink</code> 上的。</p>
+<p><strong><code>insert</code> 方法先把要插入的元素添加到堆底的最后，然后让其上浮到正确位置</strong>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">insert</span><span class="o">(</span><span class="n">Key</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">N</span><span class="o">++;</span>
+    <span class="c1">// 先把新元素加到最后
+</span><span class="c1"></span>    <span class="n">pq</span><span class="o">[</span><span class="n">N</span><span class="o">]</span> <span class="o">=</span> <span class="n">e</span><span class="o">;</span>
+    <span class="c1">// 然后让它上浮到正确的位置
+</span><span class="c1"></span>    <span class="n">swim</span><span class="o">(</span><span class="n">N</span><span class="o">);</span>
+<span class="o">}</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><p><strong><code>delMax</code> 方法先把堆顶元素 <code>A</code> 和堆底最后的元素 <code>B</code> 对调，然后删除 <code>A</code>，最后让 <code>B</code> 下沉到正确位置</strong>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="n">Key</span> <span class="nf">delMax</span><span class="o">()</span> <span class="o">{</span>
+    <span class="c1">// 最大堆的堆顶就是最大元素
+</span><span class="c1"></span>    <span class="n">Key</span> <span class="n">max</span> <span class="o">=</span> <span class="n">pq</span><span class="o">[</span><span class="n">1</span><span class="o">];</span>
+    <span class="c1">// 把这个最大元素换到最后，删除之
+</span><span class="c1"></span>    <span class="n">exch</span><span class="o">(</span><span class="n">1</span><span class="o">,</span> <span class="n">N</span><span class="o">);</span>
+    <span class="n">pq</span><span class="o">[</span><span class="n">N</span><span class="o">]</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="n">N</span><span class="o">--;</span>
+    <span class="c1">// 让 pq[1] 下沉到正确位置
+</span><span class="c1"></span>    <span class="n">sink</span><span class="o">(</span><span class="n">1</span><span class="o">);</span>
+    <span class="k">return</span> <span class="n">max</span><span class="o">;</span>
+<span class="o">}</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><p>至此，一个优先级队列就实现了，插入和删除元素的时间复杂度为 <code>O(logK)</code>，<code>K</code> 为当前二叉堆（优先级队列）中的元素总数。因为我们时间复杂度主要花费在 <code>sink</code> 或者 <code>swim</code> 上，而不管上浮还是下沉，最多也就树（堆）的高度，也就是 log 级别。</p>
+<h5 id="java中使用优先级队列priorityqueue">java中使用优先级队列（PriorityQueue）</h5>
+<p>自 JDK 1.5 起，Java 容器类库中提供了优先级队列的工具 — <code>PriorityQueue</code>。</p>
+<blockquote>
+<p>An unbounded priority {@linkplain Queue queue} based on a priority heap. The elements of the priority queue are ordered according to their {@linkplain Comparable natural ordering}, or by a {@link Comparator} provided at queue construction time, depending on which constructor is used.  A priority queue does not permit {@code null} elements. A priority queue relying on natural ordering also does not permit insertion of non-comparable objects (doing so may result in {@code ClassCastException}).</p>
+</blockquote>
+<p>一个基于优先级堆的无界优先级队列。优先级队列的元素，根据他们的 <a href="../../java/lang/Comparable.html" rel="">natural ordering</a>，或通过 <a href="../../java/util/Comparator.html" rel=""><code>Comparator</code></a>方法进行排序。</p>
+<p>一个优先队列不允许  <code>null</code>元素。依靠自然排序的优先级队列也不允许插入不可比较的对象（这样做可能导致  <code>ClassCastException</code>）。</p>
+<p>这个类和它的迭代器实现所有的可选方法的<a href="../../java/util/Collection.html" rel=""><code>Collection</code></a>和<a href="../../java/util/Iterator.html" rel=""><code>Iterator</code></a>接口。方法<a href="../../java/util/PriorityQueue.html#iterator--" rel=""><code>iterator()</code></a>提供的迭代器不能保证遍历优先级队列的元素在任何特定的顺序。如果你需要有序遍历，考虑使用<code>Arrays.sort(pq.toArray())</code>。</p>
+<blockquote>
+<p>注：``PriorityQueue<code>是非线程安全的，如果想要在多线程的环境下使用，可以使用</code>PriorityBlockingQueue`。</p>
+</blockquote>
+<p>（更多参考jdk文档）</p>
+<p><strong>构造方法</strong>（Constructor）</p>
+<table>
+<thead>
+<tr>
+<th>Constructor and Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>PriorityQueue()</code>  创建一个默认的初始容量  <code>PriorityQueue</code>（11），命令其元素按其 <a href="../../java/lang/Comparable.html" rel="">natural ordering</a>。</td>
+</tr>
+<tr>
+<td><code>PriorityQueue(Collection&lt;? extends E&gt; c)</code>  创建一个 <code>PriorityQueue</code>包含在指定集合的元素。</td>
+</tr>
+<tr>
+<td><code>PriorityQueue(Comparator&lt;? super E&gt; comparator)</code>  创建一个默认的初始容量和它的元素是按指定的比较器  <code>PriorityQueue</code>。</td>
+</tr>
+<tr>
+<td><code>PriorityQueue(int initialCapacity)</code>  创建一个具有指定的初始容量，命令其元素按其 <a href="../../java/lang/Comparable.html" rel="">natural  ordering</a> <code>PriorityQueue</code>。</td>
+</tr>
+<tr>
+<td><code>PriorityQueue(int initialCapacity,  Comparator&lt;? super E&gt; comparator)</code>  创建一个具有指定的初始容量，命令其元素根据指定的比较器  <code>PriorityQueue</code>。</td>
+</tr>
+<tr>
+<td><code>PriorityQueue(PriorityQueue&lt;? extends E&gt; c)</code>  创建一个 <code>PriorityQueue</code>包含指定的优先级队列中的元素。</td>
+</tr>
+<tr>
+<td><code>PriorityQueue(SortedSet&lt;? extends E&gt; c)</code>  创建一个 <code>PriorityQueue</code>含有指定排序的集合中的元素。</td>
+</tr>
+</tbody>
+</table>
+<p><strong>方法</strong>(Method)</p>
+<table>
+<thead>
+<tr>
+<th>Modifier and Type</th>
+<th>Method and Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>boolean</code></td>
+<td><code>add(E e)</code>  将指定的元素插入到该优先级队列中。</td>
+</tr>
+<tr>
+<td><code>void</code></td>
+<td><code>clear()</code>  从这个优先级队列中移除所有的元素。</td>
+</tr>
+<tr>
+<td><code>Comparator&lt;? super E&gt;</code></td>
+<td><code>comparator()</code>  返回用于为该队列中的元素的比较，或 <code>null</code>如果这个队列是根据其元素的  <a href="../../java/lang/Comparable.html" rel="">natural  ordering</a>排序。</td>
+</tr>
+<tr>
+<td><code>boolean</code></td>
+<td><code>contains(Object o)</code>  返回 <code>true</code>如果此队列包含指定的元素。</td>
+</tr>
+<tr>
+<td><code>Iterator&lt;E&gt;</code></td>
+<td><code>iterator()</code>  返回此队列中元素的迭代器。</td>
+</tr>
+<tr>
+<td><code>boolean</code></td>
+<td><code>offer(E e)</code>  将指定的元素插入到该优先级队列中。</td>
+</tr>
+<tr>
+<td><code>E</code></td>
+<td><code>peek()</code>  检索，但不删除，这个队列头，或返回 <code>null</code>如果队列为空。</td>
+</tr>
+<tr>
+<td><code>E</code></td>
+<td><code>poll()</code>  检索并移除此队列的头，或返回 <code>null</code>如果队列为空。</td>
+</tr>
+<tr>
+<td><code>boolean</code></td>
+<td><code>remove(Object o)</code>  从该队列中移除指定元素的一个实例，如果它是存在的。</td>
+</tr>
+<tr>
+<td><code>int</code></td>
+<td><code>size()</code>  返回此集合中的元素的数目。</td>
+</tr>
+<tr>
+<td><code>Spliterator&lt;E&gt;</code></td>
+<td><code>spliterator()</code>  创建一个后期绑定和快速失败 <a href="../../java/util/Spliterator.html" rel=""><code>Spliterator</code></a>在队列中的元素。</td>
+</tr>
+<tr>
+<td><code>Object[]</code></td>
+<td><code>toArray()</code>  返回一个包含此队列中所有元素的数组。</td>
+</tr>
+<tr>
+<td><code>&lt;T&gt; T[]</code></td>
+<td><code>toArray(T[] a)</code>  返回包含此队列中的所有元素的数组；返回数组的运行时类型是指定的数组的运行时类型。</td>
+</tr>
+</tbody>
+</table>
+<p><code>add(E e)</code>和<code>offer(E e)</code>的语义相同，都是向优先队列中插入元素，只是<code>Queue</code>接口规定二者对插入失败时的处理不同，前者在插入失败时抛出异常，后则则会返回<code>false</code>。对于<em>PriorityQueue</em>这两个方法其实没什么差别。</p>
+<p><code>element()</code>和<code>peek()</code>的语义完全相同，都是获取但不删除队首元素，也就是队列中权值最小的那个元素，二者唯一的区别是当方法失败时前者抛出异常，后者返回null。根据小顶堆的性质，堆顶那个元素就是全局最小的那个；由于堆用数组表示，根据下标关系，0下标处的那个元素既是堆顶元素。所以直接返回数组0下标处的那个元素即可。</p>
+<p><code>remove()</code>和<code>poll()</code>方法的语义也完全相同，都是获取并删除队首元素，区别是当方法失败时前者抛出异常，后者返回<code>null</code>。由于删除操作会改变队列的结构，为维护小顶堆的性质，需要进行必要的调整。</p>
+<p><strong>java优先级队列源码分析</strong></p>
+<p>继承图</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://gitee.com/li_yue1999/picture-of-note/raw/master/img/image-20211231132528856.png"
+        data-srcset="https://gitee.com/li_yue1999/picture-of-note/raw/master/img/image-20211231132528856.png, https://gitee.com/li_yue1999/picture-of-note/raw/master/img/image-20211231132528856.png 1.5x, https://gitee.com/li_yue1999/picture-of-note/raw/master/img/image-20211231132528856.png 2x"
+        data-sizes="auto"
+        alt="https://gitee.com/li_yue1999/picture-of-note/raw/master/img/image-20211231132528856.png"
+        title="PriorityQueue继承图" /></p>
+<p>可见，<code>PriorityQueue</code>属于集合框架下的类。它具有集合的特点，所以集合中的方法它能够使用。``PriorityQueue<code>继承自</code>AbstractQueue<code>，不允许插入</code>null`元素。</p>
+<p><code>PriorityQueue</code>继承自<code>Queue</code>, 所以在使用上也继承了``Queue<code>的 </code>offer()<code>与</code>poll()<code>。鉴于</code>PriorityQueue`的有序特点，它重写了该方法。</p>
+<p><strong>优先队列的插入</strong>
+为了保持PriorityQueue元素的有序性，在进行插入时，我们总是对插入后的数组做调整，这种调整的方式如下：</p>
+<ul>
+<li>首先将新增元素放到队尾</li>
+<li>将插入元素与它的父节点比较，如果父节点比元素大，将元素与父节点元素调换位置</li>
+<li>继续将该元素与父节点比较，直到该元素为根节点或比父节点的元素大为止</li>
+</ul>
+<p>图示</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://gitee.com/li_yue1999/picture-of-note/raw/master/img/20201230170223733.png"
+        data-srcset="https://gitee.com/li_yue1999/picture-of-note/raw/master/img/20201230170223733.png, https://gitee.com/li_yue1999/picture-of-note/raw/master/img/20201230170223733.png 1.5x, https://gitee.com/li_yue1999/picture-of-note/raw/master/img/20201230170223733.png 2x"
+        data-sizes="auto"
+        alt="https://gitee.com/li_yue1999/picture-of-note/raw/master/img/20201230170223733.png"
+        title="二叉堆的插入" /></p>
+<p>这个时候得到的队列就是有序队列了。</p>
+<p><strong>源码</strong></p>
+<p>以下是PriorityQueue的offer有关源码（jdk1.8）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="cm">/**
+</span><span class="cm"> * Inserts the specified element into this priority queue.
+</span><span class="cm"> *
+</span><span class="cm"> * @return {@code true} (as specified by {@link Queue#offer})
+</span><span class="cm"> * @throws ClassCastException if the specified element cannot be
+</span><span class="cm"> *         compared with elements currently in this priority queue
+</span><span class="cm"> *         according to the priority queue&#39;s ordering
+</span><span class="cm"> * @throws NullPointerException if the specified element is null
+</span><span class="cm"> */</span>
+<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">offer</span><span class="o">(</span><span class="n">E</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">e</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="n">NullPointerException</span><span class="o">();</span>
+    <span class="n">modCount</span><span class="o">++;</span>
+    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">size</span><span class="o">;</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="n">queue</span><span class="o">.</span><span class="na">length</span><span class="o">)</span>
+        <span class="n">grow</span><span class="o">(</span><span class="n">i</span> <span class="o">+</span> <span class="n">1</span><span class="o">);</span>
+    <span class="n">siftUp</span><span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="n">e</span><span class="o">);</span>
+    <span class="n">size</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="n">1</span><span class="o">;</span>
+    <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java">    <span class="cm">/**
+</span><span class="cm">     * Increases the capacity of the array.
+</span><span class="cm">     *
+</span><span class="cm">     * @param minCapacity the desired minimum capacity
+</span><span class="cm">     */</span>
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">grow</span><span class="o">(</span><span class="kt">int</span> <span class="n">minCapacity</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">oldCapacity</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+        <span class="c1">// Double size if small; else grow by 50%
+</span><span class="c1"></span>        <span class="kt">int</span> <span class="n">newCapacity</span> <span class="o">=</span> <span class="n">ArraysSupport</span><span class="o">.</span><span class="na">newLength</span><span class="o">(</span><span class="n">oldCapacity</span><span class="o">,</span>
+                <span class="n">minCapacity</span> <span class="o">-</span> <span class="n">oldCapacity</span><span class="o">,</span> <span class="cm">/* minimum growth */</span>
+                <span class="n">oldCapacity</span> <span class="o">&lt;</span> <span class="n">64</span> <span class="o">?</span> <span class="n">oldCapacity</span> <span class="o">+</span> <span class="n">2</span> <span class="o">:</span> <span class="n">oldCapacity</span> <span class="o">&gt;&gt;</span> <span class="n">1</span>
+                                           <span class="cm">/* preferred growth */</span><span class="o">);</span>
+        <span class="n">queue</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">copyOf</span><span class="o">(</span><span class="n">queue</span><span class="o">,</span> <span class="n">newCapacity</span><span class="o">);</span>
+    <span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java">    <span class="cm">/**
+</span><span class="cm">     * Inserts item x at position k, maintaining heap invariant by
+</span><span class="cm">     * promoting x up the tree until it is greater than or equal to
+</span><span class="cm">     * its parent, or is the root.
+</span><span class="cm">     *
+</span><span class="cm">     * To simplify and speed up coercions and comparisons, the
+</span><span class="cm">     * Comparable and Comparator versions are separated into different
+</span><span class="cm">     * methods that are otherwise identical. (Similarly for siftDown.)
+</span><span class="cm">     *
+</span><span class="cm">     * @param k the position to fill
+</span><span class="cm">     * @param x the item to insert
+</span><span class="cm">     */</span>
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">siftUp</span><span class="o">(</span><span class="kt">int</span> <span class="n">k</span><span class="o">,</span> <span class="n">E</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">comparator</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+            <span class="n">siftUpUsingComparator</span><span class="o">(</span><span class="n">k</span><span class="o">,</span> <span class="n">x</span><span class="o">,</span> <span class="n">queue</span><span class="o">,</span> <span class="n">comparator</span><span class="o">);</span>
+        <span class="k">else</span>
+            <span class="n">siftUpComparable</span><span class="o">(</span><span class="n">k</span><span class="o">,</span> <span class="n">x</span><span class="o">,</span> <span class="n">queue</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="kt">void</span> <span class="nf">siftUpComparable</span><span class="o">(</span><span class="kt">int</span> <span class="n">k</span><span class="o">,</span> <span class="n">T</span> <span class="n">x</span><span class="o">,</span> <span class="n">Object</span><span class="o">[]</span> <span class="n">es</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Comparable</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">T</span><span class="o">&gt;</span> <span class="n">key</span> <span class="o">=</span> <span class="o">(</span><span class="n">Comparable</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">T</span><span class="o">&gt;)</span> <span class="n">x</span><span class="o">;</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">k</span> <span class="o">&gt;</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">parent</span> <span class="o">=</span> <span class="o">(</span><span class="n">k</span> <span class="o">-</span> <span class="n">1</span><span class="o">)</span> <span class="o">&gt;&gt;&gt;</span> <span class="n">1</span><span class="o">;</span>
+            <span class="n">Object</span> <span class="n">e</span> <span class="o">=</span> <span class="n">es</span><span class="o">[</span><span class="n">parent</span><span class="o">];</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">key</span><span class="o">.</span><span class="na">compareTo</span><span class="o">((</span><span class="n">T</span><span class="o">)</span> <span class="n">e</span><span class="o">)</span> <span class="o">&gt;=</span> <span class="n">0</span><span class="o">)</span>
+                <span class="k">break</span><span class="o">;</span>
+            <span class="n">es</span><span class="o">[</span><span class="n">k</span><span class="o">]</span> <span class="o">=</span> <span class="n">e</span><span class="o">;</span>
+            <span class="n">k</span> <span class="o">=</span> <span class="n">parent</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="n">es</span><span class="o">[</span><span class="n">k</span><span class="o">]</span> <span class="o">=</span> <span class="n">key</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="kt">void</span> <span class="nf">siftUpUsingComparator</span><span class="o">(</span>
+        <span class="kt">int</span> <span class="n">k</span><span class="o">,</span> <span class="n">T</span> <span class="n">x</span><span class="o">,</span> <span class="n">Object</span><span class="o">[]</span> <span class="n">es</span><span class="o">,</span> <span class="n">Comparator</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="n">T</span><span class="o">&gt;</span> <span class="n">cmp</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">k</span> <span class="o">&gt;</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">parent</span> <span class="o">=</span> <span class="o">(</span><span class="n">k</span> <span class="o">-</span> <span class="n">1</span><span class="o">)</span> <span class="o">&gt;&gt;&gt;</span> <span class="n">1</span><span class="o">;</span>
+            <span class="n">Object</span> <span class="n">e</span> <span class="o">=</span> <span class="n">es</span><span class="o">[</span><span class="n">parent</span><span class="o">];</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">cmp</span><span class="o">.</span><span class="na">compare</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="o">(</span><span class="n">T</span><span class="o">)</span> <span class="n">e</span><span class="o">)</span> <span class="o">&gt;=</span> <span class="n">0</span><span class="o">)</span>
+                <span class="k">break</span><span class="o">;</span>
+            <span class="n">es</span><span class="o">[</span><span class="n">k</span><span class="o">]</span> <span class="o">=</span> <span class="n">e</span><span class="o">;</span>
+            <span class="n">k</span> <span class="o">=</span> <span class="n">parent</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="n">es</span><span class="o">[</span><span class="n">k</span><span class="o">]</span> <span class="o">=</span> <span class="n">x</span><span class="o">;</span>
+    <span class="o">}</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="原文"><strong>原文</strong></h4>
+<p><a href="https://labuladong.gitee.io/algo/1/6/" target="_blank" rel="noopener noreffer">一文搞懂单链表的六大解题套路</a></p>
+<p><a href="https://labuladong.gitee.io/algo/2/20/50/" target="_blank" rel="noopener noreffer">二叉堆详解实现优先级队列</a></p>
+<p><a href="https://blog.csdn.net/weixin_43320847/article/details/83043484" target="_blank" rel="noopener noreffer">java优先级队列</a></p>
+<p><a href="https://blog.csdn.net/u010623927/article/details/87179364" target="_blank" rel="noopener noreffer">PriorityQueue的用法和底层实现原理</a></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2021-12-31</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/%E5%90%88%E5%B9%B6k%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://kelo7.github.io/%E5%90%88%E5%B9%B6k%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/" data-title="合并k个有序链表" data-via="xxxx" data-hashtags="力扣刷题,每日一题,链表"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://kelo7.github.io/%E5%90%88%E5%B9%B6k%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/" data-hashtag="力扣刷题"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://kelo7.github.io/%E5%90%88%E5%B9%B6k%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/" data-title="合并k个有序链表" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://kelo7.github.io/%E5%90%88%E5%B9%B6k%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/" data-title="合并k个有序链表"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://kelo7.github.io/%E5%90%88%E5%B9%B6k%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/" data-title="合并k个有序链表"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://kelo7.github.io/%E5%90%88%E5%B9%B6k%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/" data-title="合并k个有序链表" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://kelo7.github.io/%E5%90%88%E5%B9%B6k%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/" data-title="合并k个有序链表" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://kelo7.github.io/%E5%90%88%E5%B9%B6k%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/" data-title="合并k个有序链表"><i class="fab fa-evernote fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E5%8A%9B%E6%89%A3%E5%88%B7%E9%A2%98/">力扣刷题</a>,&nbsp;<a href="/tags/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/">每日一题</a>,&nbsp;<a href="/tags/%E9%93%BE%E8%A1%A8/">链表</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E9%93%BE%E8%A1%A8/" class="prev" rel="prev" title="合并两个链表"><i class="fas fa-angle-left fa-fw"></i>合并两个链表</a>
+            <a href="/comparator%E4%B8%8Elambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="next" rel="next" title="Comparator与lambda表达式">Comparator与lambda表达式<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.76.5">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">kelo</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

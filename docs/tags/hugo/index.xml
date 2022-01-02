@@ -9,6 +9,6 @@
     <pubDate>Tue, 21 Dec 2021 11:47:47 &#43;0800</pubDate>
     <author>作者</author>
     <guid>https://kelo7.github.io/%E4%BD%BF%E7%94%A8hugo/</guid>
-    <description><![CDATA[hugo使用 不经常用hugo，导致每次使用都要重新翻找教程，干脆把要用的操作写下来备份 创建新文章： 1 hugo new posts/my-first-post.md 这里面值得注意的是，通过上述命令行]]></description>
+    <description><![CDATA[hugo使用 不经常用hugo，导致每次使用都要重新翻找教程，干脆把要常用的操作写下来备份]]></description>
 </item></channel>
 </rss>
