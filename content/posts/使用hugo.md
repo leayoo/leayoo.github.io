@@ -4,15 +4,18 @@ date: 2021-12-21T11:47:47+08:00
 draft: false
 description: "一篇关于hugo使用的文章"
 categories: [
-    "未其他"
+    "hugo"
 ]
 tags: [
     "markdown",
     "hugo"
 ] 
+featuredImagePreview: https://gitee.com/li_yue1999/picture-of-note/raw/master/img/wallhaven-v9273l.jpg
+summary: "hugo使用 不经常用hugo，导致每次使用都要重新翻找教程，干脆把要常用的操作写下来备份"
 ---
+![pic](https://gitee.com/li_yue1999/picture-of-note/raw/master/img/wallhaven-v9273l.jpg)
 ## hugo使用
-> 不经常用hugo，导致每次使用都要重新翻找教程，干脆把要用的操作写下来备份
+> 不经常用hugo，导致每次使用都要重新翻找教程，干脆把要常用的操作写下来备份
 
 1. 创建新文章：
 
@@ -48,6 +51,21 @@ categories: [
 ---
 ```
 
+更多前置参数
+
+- **title**: 文章标题.
+- **subtitle**: 文章副标题.
+- **date**: 这篇文章创建的日期时间. 它通常是从文章的前置参数中的 `date` 字段获取的, 但是也可以在 [网站配置](https://hugoloveit.com/zh-cn/theme-documentation-basics#site-configuration) 中设置.
+- **lastmod**: 上次修改内容的日期时间.
+- **draft**: 如果设为 `true`, 除非 `hugo` 命令使用了 `--buildDrafts`/`-D` 参数, 这篇文章不会被渲染.
+- **author**: 文章作者.
+- **authorLink**: 文章作者的链接.
+- **description**: 文章内容的描述.
+- **license**: 这篇文章特殊的许可.
+- **tags**: 文章的标签.
+- **categories**: 文章所属的类别.
+- **featuredImagePreview**: 用在主页预览的文章特色图片.
+- **summary**: 文章摘要
 
 2. 打包网站到 /docs 文件夹
 
@@ -77,4 +95,4 @@ ssh key的配置参考：[GitHub如何配置SSH Key](https://blog.csdn.net/u0137
 
 ### 参考
 本文参考：[使用 Hugo + Github 搭建个人博客](https://zhuanlan.zhihu.com/p/105021100)
-
+[主题文档-内容](https://hugoloveit.com/zh-cn/theme-documentation-content/)
