@@ -11,9 +11,9 @@ tags: [
 categories: [
     "leetcode"
 ]
-featuredImagePreview: https://gitee.com/li_yue1999/picture-of-note/raw/master/img/wallhaven-pk52g3.jpg
+featuredImagePreview: https://pic2.zhimg.com/v2-db0f7831a7eda4eb07f951657fe5a8e0_r.jpg?source=1940ef5c
 ---
-![General 2500x1112 artwork digital art nature clouds trees](https://gitee.com/li_yue1999/picture-of-note/raw/master/img/wallhaven-pk52g3.jpg)
+![](https://pic2.zhimg.com/v2-db0f7831a7eda4eb07f951657fe5a8e0_r.jpg?source=1940ef5c)
 
 ### 合并k个有序链表
 

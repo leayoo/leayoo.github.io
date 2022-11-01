@@ -11,9 +11,9 @@ tags: [
 categories: [
     "Java 8"
 ]
-featuredImagePreview: https://gitee.com/li_yue1999/picture-of-note/raw/master/img/wallhaven-m9rqpm.jpg
+featuredImagePreview: https://w.wallhaven.cc/full/l3/wallhaven-l3xk6q.jpg
 ---
-![General 1920x941 artwork fantasy art architecture Asian architecture](https://gitee.com/li_yue1999/picture-of-note/raw/master/img/wallhaven-m9rqpm.jpg)
+![](https://w.wallhaven.cc/full/l3/wallhaven-l3xk6q.jpg)
 
 
 

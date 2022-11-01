@@ -1,7 +1,7 @@
 # 单链表的倒数第k个节点
 
 
-![General 1920x1080 artwork digital art space spaceship science fiction Simon Heath Cryo Chamber](https://gitee.com/li_yue1999/picture-of-note/raw/master/img/wallhaven-6oe7ww.jpg)
+![](https://pic1.zhimg.com/v2-4e248da849f6883330b7f6fb49c07e3c_r.jpg?source=1940ef5c)
 
 ### 单链表的倒数第k个节点
 

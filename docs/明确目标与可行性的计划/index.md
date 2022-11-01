@@ -3,7 +3,7 @@
 
 <!--more-->
 
-![General 1920x1080 artwork science fiction space space station ArtStation Morgan Prost futuristic digital art](https://gitee.com/li_yue1999/picture-of-note/raw/master/img/wallhaven-l3zmwy.jpg)
+![](https://picx.zhimg.com/v2-b34a91e467c83303d7ab40b0bb3ca1d5_r.jpg)
 
 ### **明确目标与可行性的计划**
 
