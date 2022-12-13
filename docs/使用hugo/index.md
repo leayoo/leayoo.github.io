@@ -1,6 +1,6 @@
 # 使用hugo
 
-![pic](https://gitee.com/li_yue1999/picture-of-note/raw/master/img/wallhaven-v9273l.jpg)
+![pic](https://w.wallhaven.cc/full/9m/wallhaven-9mjoy1.png)
 ## hugo使用
 > 不经常用hugo，导致每次使用都要重新翻找教程，干脆把要常用的操作写下来备份
 

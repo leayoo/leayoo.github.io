@@ -3,47 +3,12 @@
         <title>leetcode - 分类 - kelo&#39;s personal blog</title>
         <link>https://kelo7.github.io/categories/leetcode/</link>
         <description>leetcode - 分类 - kelo&#39;s personal blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 02 Jan 2022 23:44:31 &#43;0800</lastBuildDate><atom:link href="https://kelo7.github.io/categories/leetcode/" rel="self" type="application/rss+xml" /><item>
-    <title>两个链表是否相交</title>
-    <link>https://kelo7.github.io/%E4%B8%A4%E4%B8%AA%E9%93%BE%E8%A1%A8%E6%98%AF%E5%90%A6%E7%9B%B8%E4%BA%A4/</link>
-    <pubDate>Sun, 02 Jan 2022 23:44:31 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://kelo7.github.io/%E4%B8%A4%E4%B8%AA%E9%93%BE%E8%A1%A8%E6%98%AF%E5%90%A6%E7%9B%B8%E4%BA%A4/</guid>
-    <description><![CDATA[两个链表是否相交（问题，思路，代码）]]></description>
-</item><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 02 Jan 2022 23:12:42 &#43;0800</lastBuildDate><atom:link href="https://kelo7.github.io/categories/leetcode/" rel="self" type="application/rss+xml" /><item>
     <title>双指针技巧总结</title>
     <link>https://kelo7.github.io/%E5%8F%8C%E6%8C%87%E9%92%88%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93/</link>
     <pubDate>Sun, 02 Jan 2022 23:12:42 &#43;0800</pubDate>
     <author>作者</author>
     <guid>https://kelo7.github.io/%E5%8F%8C%E6%8C%87%E9%92%88%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93/</guid>
     <description><![CDATA[双指针技巧总结, 快慢指针与左右指针的思路]]></description>
-</item><item>
-    <title>删除链表的倒数第N个节点</title>
-    <link>https://kelo7.github.io/%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACn%E4%B8%AA%E8%8A%82%E7%82%B9/</link>
-    <pubDate>Sat, 01 Jan 2022 00:37:04 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://kelo7.github.io/%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACn%E4%B8%AA%E8%8A%82%E7%82%B9/</guid>
-    <description><![CDATA[删除链表的倒数第N个节点的思路与代码]]></description>
-</item><item>
-    <title>单链表的倒数第k个节点</title>
-    <link>https://kelo7.github.io/%E5%8D%95%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACk%E4%B8%AA%E8%8A%82%E7%82%B9/</link>
-    <pubDate>Sat, 01 Jan 2022 00:05:17 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://kelo7.github.io/%E5%8D%95%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACk%E4%B8%AA%E8%8A%82%E7%82%B9/</guid>
-    <description><![CDATA[单链表的倒数第k个节点的思路与代码]]></description>
-</item><item>
-    <title>合并k个有序链表</title>
-    <link>https://kelo7.github.io/%E5%90%88%E5%B9%B6k%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/</link>
-    <pubDate>Fri, 31 Dec 2021 18:45:03 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://kelo7.github.io/%E5%90%88%E5%B9%B6k%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/</guid>
-    <description><![CDATA[合并k个有序链表的思路与代码（包括二叉堆与优先级队列）]]></description>
-</item><item>
-    <title>合并两个链表</title>
-    <link>https://kelo7.github.io/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E9%93%BE%E8%A1%A8/</link>
-    <pubDate>Fri, 31 Dec 2021 12:01:50 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://kelo7.github.io/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E9%93%BE%E8%A1%A8/</guid>
-    <description><![CDATA[合并两个链表的思路与代码]]></description>
 </item></channel>
 </rss>
