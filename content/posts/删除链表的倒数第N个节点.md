@@ -1,7 +1,7 @@
 ---
 title: "删除链表的倒数第N个节点"
 date: 2022-01-01T00:37:04+08:00
-draft: false
+draft: true
 summary: "删除链表的倒数第N个节点的思路与代码"
 tags: [
     "力扣刷题",

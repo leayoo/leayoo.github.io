@@ -1,7 +1,7 @@
 ---
 title: "单链表的倒数第k个节点"
 date: 2022-01-01T00:05:17+08:00
-draft: false
+draft: true
 summary: "单链表的倒数第k个节点的思路与代码"
 tags: [
     "力扣刷题",
