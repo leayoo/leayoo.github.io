@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>双指针技巧总结 - kelo&#39;s personal blog</title><meta name="Description" content="a personal blog"><meta property="og:title" content="双指针技巧总结" />
+<meta property="og:description" content="双指针技巧总结, 快慢指针与左右指针的思路" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kelo7.github.io/%E5%8F%8C%E6%8C%87%E9%92%88%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93/" />
+<meta property="og:image" content="https://kelo7.github.io/logo.png"/>
+<meta property="article:published_time" content="2022-01-02T23:12:42+08:00" />
+<meta property="article:modified_time" content="2022-01-02T23:12:42+08:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://kelo7.github.io/logo.png"/>
+
+<meta name="twitter:title" content="双指针技巧总结"/>
+<meta name="twitter:description" content="双指针技巧总结, 快慢指针与左右指针的思路"/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://kelo7.github.io/%E5%8F%8C%E6%8C%87%E9%92%88%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93/" /><link rel="prev" href="https://kelo7.github.io/%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACn%E4%B8%AA%E8%8A%82%E7%82%B9/" /><link rel="next" href="https://kelo7.github.io/%E4%B8%A4%E4%B8%AA%E9%93%BE%E8%A1%A8%E6%98%AF%E5%90%A6%E7%9B%B8%E4%BA%A4/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "双指针技巧总结",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/kelo7.github.io\/%E5%8F%8C%E6%8C%87%E9%92%88%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93\/"
+        },"genre": "posts","keywords": "力扣刷题, 每日一题, 链表","wordcount":  2763 ,
+        "url": "https:\/\/kelo7.github.io\/%E5%8F%8C%E6%8C%87%E9%92%88%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93\/","datePublished": "2022-01-02T23:12:42+08:00","dateModified": "2022-01-02T23:12:42+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "kelo"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="kelo&#39;s personal blog">Kelo&#39;s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="kelo&#39;s personal blog">Kelo&#39;s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">双指针技巧总结</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>kelo</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/leetcode/"><i class="far fa-folder fa-fw"></i>leetcode</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-01-02">2022-01-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2763 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 6 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#一快慢指针的常见算法">一、快慢指针的常见算法</a>
+      <ul>
+        <li><a href="#1判定链表中是否含有环">1、判定链表中是否含有环</a></li>
+        <li><a href="#2已知链表中含有环返回这个环的起始位置">2、已知链表中含有环，返回这个环的起始位置</a></li>
+        <li><a href="#3寻找链表的中点">3、寻找链表的中点</a></li>
+        <li><a href="#4寻找链表的倒数第-n-个元素">4、寻找链表的倒数第 <code>n</code> 个元素</a></li>
+      </ul>
+    </li>
+    <li><a href="#二左右指针的常用算法">二、左右指针的常用算法</a>
+      <ul>
+        <li><a href="#1二分查找">1、二分查找</a></li>
+        <li><a href="#2两数之和">2、两数之和</a></li>
+        <li><a href="#3反转数组">3、反转数组</a></li>
+        <li><a href="#4滑动窗口算法">4、滑动窗口算法</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://picx.zhimg.com/v2-67cb951d8b2275c7cb6195c5052550bb_r.jpg"
+        data-srcset="https://picx.zhimg.com/v2-67cb951d8b2275c7cb6195c5052550bb_r.jpg, https://picx.zhimg.com/v2-67cb951d8b2275c7cb6195c5052550bb_r.jpg 1.5x, https://picx.zhimg.com/v2-67cb951d8b2275c7cb6195c5052550bb_r.jpg 2x"
+        data-sizes="auto"
+        alt="https://picx.zhimg.com/v2-67cb951d8b2275c7cb6195c5052550bb_r.jpg"
+        title="https://picx.zhimg.com/v2-67cb951d8b2275c7cb6195c5052550bb_r.jpg" /></p>
+<h1 id="双指针技巧总结">双指针技巧总结</h1>
+<p>原文<a href="https://labuladong.gitee.io/algo/2/21/55/" target="_blank" rel="noopener noreffer">双指针技巧总结</a></p>
+<p>双指针技巧再分为两类，一类是「<strong>快慢指针</strong>」，一类是「<strong>左右指针</strong>」。前者解决主要解决链表中的问题，比如典型的判定链表中是否包含环；后者主要解决数组（或者字符串）中的问题，比如二分查找。</p>
+</br>
+<h2 id="一快慢指针的常见算法">一、快慢指针的常见算法</h2>
+<p>快慢指针一般都初始化指向链表的头结点 <code>head</code>，前进时快指针 <code>fast</code> 在前，慢指针 <code>slow</code> 在后，巧妙解决一些链表中的问题。</p>
+</br>
+<h3 id="1判定链表中是否含有环">1、判定链表中是否含有环</h3>
+<p>单链表的特点是每个节点只知道下一个节点，所以一个指针的话无法判断链表中是否含有环的。</p>
+<p>如果链表中不含环，那么这个指针最终会遇到空指针 <code>null</code> 表示链表到头了，这还好说，可以判断该链表不含环：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// 思路：如果当前不为空值，就指向下一个
+</span><span class="c1"></span><span class="kt">boolean</span> <span class="nf">hasCycle</span><span class="o">(</span><span class="n">ListNode</span> <span class="n">head</span><span class="o">){</span>
+    <span class="k">while</span> <span class="o">(</span><span class="n">head</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+        <span class="n">head</span> <span class="o">=</span> <span class="n">head</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+    <span class="k">return</span> <span class="kc">false</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>但是如果链表中含有环，那么这个指针就会陷入死循环，因为环形数组中没有 <code>null</code> 指针作为尾部节点。</p>
+<p><u>经典解法就是用两个指针，一个跑得快，一个跑得慢。如果不含有环，跑得快的那个指针最终会遇到 <code>null</code>，说明链表不含环；如果含有环，快指针最终会超慢指针一圈，和慢指针相遇，说明链表含有环。</u></p>
+<p><strong>问题</strong></p>
+<p>环形链表</p>
+<p>给你一个链表的头节点 head ，判断链表中是否有环。</p>
+<p>如果链表中有某个节点，可以通过连续跟踪 next 指针<u>再次</u>到达，则链表中存在环。</p>
+<p>为了表示给定链表中的环，评测系统内部使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。如果 pos 是 -1，则在该链表中没有环。注意：pos 不作为参数进行传递，仅仅是为了标识链表的实际情况。</p>
+<p>如果链表中存在环，则返回 true 。 否则，返回 false 。</p>
+<p><strong>思路</strong></p>
+<ol>
+<li>初始化快慢指针，都指向头节点</li>
+<li>快慢指针向后走</li>
+<li>如果相遇则返回结果</li>
+</ol>
+<p><strong>代码</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="cm">/**
+</span><span class="cm"> * Definition for singly-linked list.
+</span><span class="cm"> * class ListNode {
+</span><span class="cm"> *     int val;
+</span><span class="cm"> *     ListNode next;
+</span><span class="cm"> *     ListNode(int x) {
+</span><span class="cm"> *         val = x;
+</span><span class="cm"> *         next = null;
+</span><span class="cm"> *     }
+</span><span class="cm"> * }
+</span><span class="cm"> */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">hasCycle</span><span class="o">(</span><span class="n">ListNode</span> <span class="n">head</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">ListNode</span> <span class="n">fast</span><span class="o">,</span> <span class="n">slow</span><span class="o">;</span>
+        <span class="n">fast</span> <span class="o">=</span> <span class="n">slow</span> <span class="o">=</span><span class="n">head</span><span class="o">;</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">fast</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">fast</span><span class="o">.</span><span class="na">next</span> <span class="o">!=</span><span class="kc">null</span><span class="o">){</span>
+            <span class="n">fast</span> <span class="o">=</span> <span class="n">fast</span><span class="o">.</span><span class="na">next</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+            <span class="n">slow</span> <span class="o">=</span> <span class="n">slow</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+
+            <span class="k">if</span> <span class="o">(</span><span class="n">fast</span> <span class="o">==</span> <span class="n">slow</span><span class="o">)</span> 
+                <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+    <span class="o">}</span>
+    
+
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></br>
+<h3 id="2已知链表中含有环返回这个环的起始位置">2、已知链表中含有环，返回这个环的起始位置</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://labuladong.gitee.io/algo/images/%e5%8f%8c%e6%8c%87%e9%92%88/1.jpeg"
+        data-srcset="https://labuladong.gitee.io/algo/images/%e5%8f%8c%e6%8c%87%e9%92%88/1.jpeg, https://labuladong.gitee.io/algo/images/%e5%8f%8c%e6%8c%87%e9%92%88/1.jpeg 1.5x, https://labuladong.gitee.io/algo/images/%e5%8f%8c%e6%8c%87%e9%92%88/1.jpeg 2x"
+        data-sizes="auto"
+        alt="https://labuladong.gitee.io/algo/images/双指针/1.jpeg"
+        title="img" /></p>
+<p><strong>问题</strong></p>
+<p>给定一个链表，返回链表开始入环的第一个节点。 如果链表无环，则返回 null。</p>
+<p>如果链表中有某个节点，可以通过连续跟踪 next 指针再次到达，则链表中存在环。 为了表示给定链表中的环，评测系统内部使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。如果 pos 是 -1，则在该链表中没有环。</p>
+<p>注意：pos 不作为参数进行传递，仅仅是为了标识链表的实际情况。</p>
+<p>不允许修改 链表。</p>
+<p>示例 1：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://gitee.com/li_yue1999/picture-of-note/raw/master/img/circularlinkedlist.png"
+        data-srcset="https://gitee.com/li_yue1999/picture-of-note/raw/master/img/circularlinkedlist.png, https://gitee.com/li_yue1999/picture-of-note/raw/master/img/circularlinkedlist.png 1.5x, https://gitee.com/li_yue1999/picture-of-note/raw/master/img/circularlinkedlist.png 2x"
+        data-sizes="auto"
+        alt="https://gitee.com/li_yue1999/picture-of-note/raw/master/img/circularlinkedlist.png"
+        title="img" /></p>
+<p>输入：head = [3,2,0,-4], pos = 1
+输出：返回索引为 1 的链表节点
+解释：链表中有一个环，其尾部连接到第二个节点。
+示例 2：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://gitee.com/li_yue1999/picture-of-note/raw/master/img/circularlinkedlist_test2.png"
+        data-srcset="https://gitee.com/li_yue1999/picture-of-note/raw/master/img/circularlinkedlist_test2.png, https://gitee.com/li_yue1999/picture-of-note/raw/master/img/circularlinkedlist_test2.png 1.5x, https://gitee.com/li_yue1999/picture-of-note/raw/master/img/circularlinkedlist_test2.png 2x"
+        data-sizes="auto"
+        alt="https://gitee.com/li_yue1999/picture-of-note/raw/master/img/circularlinkedlist_test2.png"
+        title="img" /></p>
+<p>输入：head = [1,2], pos = 0
+输出：返回索引为 0 的链表节点
+解释：链表中有一个环，其尾部连接到第一个节点。
+示例 3：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://gitee.com/li_yue1999/picture-of-note/raw/master/img/circularlinkedlist_test3.png"
+        data-srcset="https://gitee.com/li_yue1999/picture-of-note/raw/master/img/circularlinkedlist_test3.png, https://gitee.com/li_yue1999/picture-of-note/raw/master/img/circularlinkedlist_test3.png 1.5x, https://gitee.com/li_yue1999/picture-of-note/raw/master/img/circularlinkedlist_test3.png 2x"
+        data-sizes="auto"
+        alt="https://gitee.com/li_yue1999/picture-of-note/raw/master/img/circularlinkedlist_test3.png"
+        title="img" /></p>
+<p>输入：head = [1], pos = -1
+输出：返回 null
+解释：链表中没有环。</p>
+<p><strong>思路</strong></p>
+<p>当快慢指针相遇时，让其中任一个指针指向头节点，然后让它俩以相同速度前进，再次相遇时所在的节点位置就是环开始的位置。这是为什么呢？</p>
+<p>第一次相遇时，假设慢指针 <code>slow</code> 走了 <code>k</code> 步，那么快指针 <code>fast</code> 一定走了 <code>2k</code> 步：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://labuladong.gitee.io/algo/images/%e5%8f%8c%e6%8c%87%e9%92%88/3.jpeg"
+        data-srcset="https://labuladong.gitee.io/algo/images/%e5%8f%8c%e6%8c%87%e9%92%88/3.jpeg, https://labuladong.gitee.io/algo/images/%e5%8f%8c%e6%8c%87%e9%92%88/3.jpeg 1.5x, https://labuladong.gitee.io/algo/images/%e5%8f%8c%e6%8c%87%e9%92%88/3.jpeg 2x"
+        data-sizes="auto"
+        alt="https://labuladong.gitee.io/algo/images/双指针/3.jpeg"
+        title="img" /></p>
+<p><strong><code>fast</code> 一定比 <code>slow</code> 多走了 <code>k</code> 步，这多走的 <code>k</code> 步其实就是 <code>fast</code> 指针在环里转圈圈，所以 <code>k</code> 的值就是环长度的「整数倍」</strong>。</p>
+<p>说句题外话，之前还有读者争论为什么是环长度整数倍，我举个简单的例子你就明白了，我们想一想极端情况，假设环长度就是 1，如下图：</p>
+<p><a href="https://labuladong.gitee.io/algo/images/%e5%8f%8c%e6%8c%87%e9%92%88/4.jpeg" target="_blank" rel="noopener noreffer"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://labuladong.gitee.io/algo/images/%e5%8f%8c%e6%8c%87%e9%92%88/4.jpeg"
+        data-srcset="https://labuladong.gitee.io/algo/images/%e5%8f%8c%e6%8c%87%e9%92%88/4.jpeg, https://labuladong.gitee.io/algo/images/%e5%8f%8c%e6%8c%87%e9%92%88/4.jpeg 1.5x, https://labuladong.gitee.io/algo/images/%e5%8f%8c%e6%8c%87%e9%92%88/4.jpeg 2x"
+        data-sizes="auto"
+        alt="https://labuladong.gitee.io/algo/images/双指针/4.jpeg"
+        title="img" /></a></p>
+<p>那么 <code>fast</code> 肯定早早就进环里转圈圈了，而且肯定会转好多圈，这不就是环长度的整数倍嘛。（也可以假设环长度为2进行类推）</p>
+<p>言归正传，设相遇点距环的起点的距离为 <code>m</code>，那么环的起点距头结点 <code>head</code> 的距离为 <code>k - m</code>，也就是说如果从 <code>head</code> 前进 <code>k - m</code> 步就能到达环起点。</p>
+<p>巧的是，如果从相遇点继续前进 <code>k - m</code> 步，也恰好到达环起点。你甭管 <code>fast</code> 在环里到底转了几圈，反正走 <code>k</code> 步可以到相遇点，那走 <code>k - m</code> 步一定就是走到环起点了：</p>
+<p><a href="https://labuladong.gitee.io/algo/images/%e5%8f%8c%e6%8c%87%e9%92%88/2.jpeg" target="_blank" rel="noopener noreffer"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://labuladong.gitee.io/algo/images/%e5%8f%8c%e6%8c%87%e9%92%88/2.jpeg"
+        data-srcset="https://labuladong.gitee.io/algo/images/%e5%8f%8c%e6%8c%87%e9%92%88/2.jpeg, https://labuladong.gitee.io/algo/images/%e5%8f%8c%e6%8c%87%e9%92%88/2.jpeg 1.5x, https://labuladong.gitee.io/algo/images/%e5%8f%8c%e6%8c%87%e9%92%88/2.jpeg 2x"
+        data-sizes="auto"
+        alt="https://labuladong.gitee.io/algo/images/双指针/2.jpeg"
+        title="img" /></a></p>
+<p>所以，只要我们把快慢指针中的任一个重新指向 <code>head</code>，然后两个指针同速前进，<code>k - m</code> 步后就会相遇，相遇之处就是环的起点了。</p>
+<ol>
+<li>初始化快慢指针指向头节点</li>
+<li>检查链表是否有环</li>
+<li>如果遇到空指针则说明没有环</li>
+<li>慢指针指向头结点</li>
+<li>慢指针快指针一起走，相遇后则返回当前位置</li>
+</ol>
+<p><strong>代码</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="cm">/**
+</span><span class="cm"> * Definition for singly-linked list.
+</span><span class="cm"> * class ListNode {
+</span><span class="cm"> *     int val;
+</span><span class="cm"> *     ListNode next;
+</span><span class="cm"> *     ListNode(int x) {
+</span><span class="cm"> *         val = x;
+</span><span class="cm"> *         next = null;
+</span><span class="cm"> *     }
+</span><span class="cm"> * }
+</span><span class="cm"> */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">ListNode</span> <span class="nf">detectCycle</span><span class="o">(</span><span class="n">ListNode</span> <span class="n">head</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// 初始化快慢指针，指向头节点
+</span><span class="c1"></span>        <span class="n">ListNode</span> <span class="n">slow</span><span class="o">,</span> <span class="n">fast</span><span class="o">;</span>
+        <span class="n">slow</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
+        <span class="n">fast</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
+        <span class="c1">// 判断快慢指针的相遇
+</span><span class="c1"></span>        <span class="k">while</span> <span class="o">(</span><span class="n">fast</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">fast</span><span class="o">.</span><span class="na">next</span><span class="o">!=</span><span class="kc">null</span><span class="o">){</span>
+            <span class="n">slow</span> <span class="o">=</span> <span class="n">slow</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+            <span class="n">fast</span> <span class="o">=</span> <span class="n">fast</span><span class="o">.</span><span class="na">next</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">slow</span> <span class="o">==</span> <span class="n">fast</span><span class="o">){</span>
+                <span class="k">break</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="c1">// 如果fast遇到空值，则说明没有环
+</span><span class="c1"></span>        <span class="k">if</span> <span class="o">(</span><span class="n">fast</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">fast</span><span class="o">.</span><span class="na">next</span> <span class="o">==</span> <span class="kc">null</span><span class="o">){</span>
+            <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="c1">// 快慢指针相遇，则慢指针指向头结点
+</span><span class="c1"></span>        <span class="n">slow</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">slow</span> <span class="o">!=</span> <span class="n">fast</span><span class="o">){</span>
+            <span class="n">slow</span> <span class="o">=</span> <span class="n">slow</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+            <span class="n">fast</span> <span class="o">=</span> <span class="n">fast</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">slow</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></br>
+<h3 id="3寻找链表的中点">3、寻找链表的中点</h3>
+<p><strong>问题</strong></p>
+<p>给定一个头结点为 <code>head</code> 的非空单链表，返回链表的中间结点。如果有两个中间结点，<u>则返回第二个中间结点</u>。</p>
+<p><strong>思路</strong></p>
+<p>让快指针一次前进两步，慢指针一次前进一步，当快指针到达链表尽头时，慢指针就处于链表的中间位置。</p>
+<p>当链表的长度是奇数时，<code>slow</code> 恰巧停在中点位置；如果长度是偶数，<code>slow</code> 最终的位置是中间偏右：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://labuladong.gitee.io/algo/images/%e5%8f%8c%e6%8c%87%e9%92%88/center.png"
+        data-srcset="https://labuladong.gitee.io/algo/images/%e5%8f%8c%e6%8c%87%e9%92%88/center.png, https://labuladong.gitee.io/algo/images/%e5%8f%8c%e6%8c%87%e9%92%88/center.png 1.5x, https://labuladong.gitee.io/algo/images/%e5%8f%8c%e6%8c%87%e9%92%88/center.png 2x"
+        data-sizes="auto"
+        alt="https://labuladong.gitee.io/algo/images/双指针/center.png"
+        title="img" /></p>
+<p>寻找链表中点的一个重要作用是对链表进行归并排序。</p>
+<p>回想数组的归并排序：求中点索引递归地把数组二分，最后合并两个有序数组。对于链表，合并两个有序链表是很简单的，难点就在于二分。</p>
+<ol>
+<li>初始化快慢指针，指向头结点</li>
+<li>快指针到末尾时，返回慢指针</li>
+</ol>
+<p><strong>代码</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="cm">/**
+</span><span class="cm"> * Definition for singly-linked list.
+</span><span class="cm"> * public class ListNode {
+</span><span class="cm"> *     int val;
+</span><span class="cm"> *     ListNode next;
+</span><span class="cm"> *     ListNode() {}
+</span><span class="cm"> *     ListNode(int val) { this.val = val; }
+</span><span class="cm"> *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+</span><span class="cm"> * }
+</span><span class="cm"> */</span>
+<span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">ListNode</span> <span class="nf">middleNode</span><span class="o">(</span><span class="n">ListNode</span> <span class="n">head</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">ListNode</span> <span class="n">fast</span><span class="o">,</span> <span class="n">slow</span><span class="o">;</span>
+        <span class="n">fast</span> <span class="o">=</span> <span class="n">slow</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
+        <span class="c1">//如果fast没到链表末尾，则快慢指针向后
+</span><span class="c1"></span>        <span class="k">while</span> <span class="o">(</span><span class="n">fast</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">fast</span><span class="o">.</span><span class="na">next</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">){</span>
+            <span class="n">slow</span> <span class="o">=</span> <span class="n">slow</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+            <span class="n">fast</span> <span class="o">=</span> <span class="n">fast</span><span class="o">.</span><span class="na">next</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">slow</span><span class="o">;</span>
+
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></br>
+<h3 id="4寻找链表的倒数第-n-个元素">4、寻找链表的倒数第 <code>n</code> 个元素</h3>
+<p>略</p>
+</br>
+<h2 id="二左右指针的常用算法">二、左右指针的常用算法</h2>
+<p>左右指针在数组中实际是指两个索引值，一般初始化为 <code>left = 0, right = nums.length - 1</code> 。</p>
+</br>
+<h3 id="1二分查找">1、二分查找</h3>
+<p>详细请看二分查找框架详解</p>
+<p>最简单的二分算法（体会当中的双指针特性）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kt">int</span> <span class="nf">binarySearch</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">,</span> <span class="kt">int</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">left</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> 
+    <span class="kt">int</span> <span class="n">right</span> <span class="o">=</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="n">1</span><span class="o">;</span>
+    <span class="k">while</span><span class="o">(</span><span class="n">left</span> <span class="o">&lt;=</span> <span class="n">right</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="o">(</span><span class="n">right</span> <span class="o">+</span> <span class="n">left</span><span class="o">)</span> <span class="o">/</span> <span class="n">2</span><span class="o">;</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">mid</span><span class="o">]</span> <span class="o">==</span> <span class="n">target</span><span class="o">)</span>
+            <span class="k">return</span> <span class="n">mid</span><span class="o">;</span> 
+        <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">mid</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">target</span><span class="o">)</span>
+            <span class="n">left</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="n">1</span><span class="o">;</span> 
+        <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">nums</span><span class="o">[</span><span class="n">mid</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">target</span><span class="o">)</span>
+            <span class="n">right</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="n">1</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="k">return</span> <span class="o">-</span><span class="n">1</span><span class="o">;</span>
+<span class="o">}</span>
+
+</code></pre></td></tr></table>
+</div>
+</div></br>
+<h3 id="2两数之和">2、两数之和</h3>
+<p><strong>问题</strong></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://labuladong.gitee.io/algo/images/%e5%8f%8c%e6%8c%87%e9%92%88/title.png"
+        data-srcset="https://labuladong.gitee.io/algo/images/%e5%8f%8c%e6%8c%87%e9%92%88/title.png, https://labuladong.gitee.io/algo/images/%e5%8f%8c%e6%8c%87%e9%92%88/title.png 1.5x, https://labuladong.gitee.io/algo/images/%e5%8f%8c%e6%8c%87%e9%92%88/title.png 2x"
+        data-sizes="auto"
+        alt="https://labuladong.gitee.io/algo/images/双指针/title.png"
+        title="img" /></p>
+<p><strong>思路</strong></p>
+<p>只要数组有序，就应该想到双指针技巧。这道题的解法有点类似二分查找，通过调节 <code>left</code> 和 <code>right</code> 可以调整 <code>sum</code> 的大小：</p>
+<ol>
+<li>初始化左右指针或索引(<code>0</code>和<code>nums.length -1</code>)</li>
+<li>当左指针小于右指针，设置sum为两数之和，如果sum为目标值则返回目标值</li>
+<li>如果sum小于目标值，则左指针后移</li>
+<li>如果sum大于目标值，则右指针前移</li>
+<li>如果sum等于目标值的情况，则返回-1</li>
+</ol>
+<p><strong>代码</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">twoSum</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">numbers</span><span class="o">,</span> <span class="kt">int</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// 初始化左右索引
+</span><span class="c1"></span>        <span class="kt">int</span> <span class="n">left</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">right</span> <span class="o">=</span> <span class="n">numbers</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="n">1</span><span class="o">;</span>
+
+        <span class="k">while</span> <span class="o">(</span><span class="n">left</span> <span class="o">&lt;</span> <span class="n">right</span><span class="o">){</span>
+            <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">numbers</span><span class="o">[</span><span class="n">left</span><span class="o">]</span> <span class="o">+</span> <span class="n">numbers</span><span class="o">[</span><span class="n">right</span><span class="o">];</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">sum</span> <span class="o">==</span> <span class="n">target</span><span class="o">){</span>
+                <span class="c1">// 返回下标值
+</span><span class="c1"></span>                <span class="k">return</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[]{</span><span class="n">left</span><span class="o">+</span><span class="n">1</span><span class="o">,</span> <span class="n">right</span><span class="o">+</span><span class="n">1</span><span class="o">};</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">sum</span> <span class="o">&lt;</span> <span class="n">target</span><span class="o">){</span>
+                <span class="n">left</span><span class="o">++;</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">sum</span> <span class="o">&gt;</span> <span class="n">target</span><span class="o">){</span>
+                <span class="n">right</span><span class="o">--;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[]{-</span><span class="n">1</span><span class="o">,</span> <span class="o">-</span><span class="n">1</span><span class="o">};</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></br>
+<h3 id="3反转数组">3、反转数组</h3>
+<p><strong>问题</strong></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://gitee.com/li_yue1999/picture-of-note/raw/master/img/image-20220102230219878.png"
+        data-srcset="https://gitee.com/li_yue1999/picture-of-note/raw/master/img/image-20220102230219878.png, https://gitee.com/li_yue1999/picture-of-note/raw/master/img/image-20220102230219878.png 1.5x, https://gitee.com/li_yue1999/picture-of-note/raw/master/img/image-20220102230219878.png 2x"
+        data-sizes="auto"
+        alt="https://gitee.com/li_yue1999/picture-of-note/raw/master/img/image-20220102230219878.png"
+        title="image-20220102230219878" /></p>
+<p><strong>思路</strong></p>
+<ol>
+<li>初始化左右指针（索引）(<code>0</code>和<code>nums.length - 1</code>)</li>
+<li>当<code>left &lt; right</code>时，交换</li>
+<li>返回数组</li>
+</ol>
+<p><strong>代码</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">reverseString</span><span class="o">(</span><span class="kt">char</span><span class="o">[]</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">left</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">right</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="n">1</span><span class="o">;</span>
+
+        <span class="k">while</span> <span class="o">(</span><span class="n">left</span> <span class="o">&lt;</span> <span class="n">right</span><span class="o">)</span> <span class="o">{</span>
+            <span class="kt">char</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">s</span><span class="o">[</span><span class="n">left</span><span class="o">];</span>
+            <span class="n">s</span><span class="o">[</span><span class="n">left</span><span class="o">]</span> <span class="o">=</span> <span class="n">s</span><span class="o">[</span><span class="n">right</span><span class="o">];</span>
+            <span class="n">s</span><span class="o">[</span><span class="n">right</span><span class="o">]</span> <span class="o">=</span> <span class="n">temp</span><span class="o">;</span>
+
+            <span class="n">left</span><span class="o">++;</span>
+            <span class="n">right</span><span class="o">--;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></br>
+<h3 id="4滑动窗口算法">4、滑动窗口算法</h3>
+<p>详情看滑动窗口篇章</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2022-01-02</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/%E5%8F%8C%E6%8C%87%E9%92%88%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://kelo7.github.io/%E5%8F%8C%E6%8C%87%E9%92%88%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93/" data-title="双指针技巧总结" data-via="xxxx" data-hashtags="力扣刷题,每日一题,链表"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://kelo7.github.io/%E5%8F%8C%E6%8C%87%E9%92%88%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93/" data-hashtag="力扣刷题"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://kelo7.github.io/%E5%8F%8C%E6%8C%87%E9%92%88%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93/" data-title="双指针技巧总结" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://kelo7.github.io/%E5%8F%8C%E6%8C%87%E9%92%88%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93/" data-title="双指针技巧总结"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://kelo7.github.io/%E5%8F%8C%E6%8C%87%E9%92%88%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93/" data-title="双指针技巧总结"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://kelo7.github.io/%E5%8F%8C%E6%8C%87%E9%92%88%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93/" data-title="双指针技巧总结" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://kelo7.github.io/%E5%8F%8C%E6%8C%87%E9%92%88%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93/" data-title="双指针技巧总结" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://kelo7.github.io/%E5%8F%8C%E6%8C%87%E9%92%88%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93/" data-title="双指针技巧总结"><i class="fab fa-evernote fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E5%8A%9B%E6%89%A3%E5%88%B7%E9%A2%98/">力扣刷题</a>,&nbsp;<a href="/tags/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/">每日一题</a>,&nbsp;<a href="/tags/%E9%93%BE%E8%A1%A8/">链表</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACn%E4%B8%AA%E8%8A%82%E7%82%B9/" class="prev" rel="prev" title="删除链表的倒数第N个节点"><i class="fas fa-angle-left fa-fw"></i>删除链表的倒数第N个节点</a>
+            <a href="/%E4%B8%A4%E4%B8%AA%E9%93%BE%E8%A1%A8%E6%98%AF%E5%90%A6%E7%9B%B8%E4%BA%A4/" class="next" rel="next" title="两个链表是否相交">两个链表是否相交<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.76.5">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">kelo</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
