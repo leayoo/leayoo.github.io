@@ -54,6 +54,11 @@ categories: [
 - **featuredImagePreview**: 用在主页预览的文章特色图片.
 - **summary**: 文章摘要
 
+1.5 如果文章 untrack 
+```text
+git add .
+```
+
 2. 打包网站到 /docs 文件夹
 
 ```text
@@ -66,7 +71,7 @@ hugo -d docs
 
 ```text
 git commit -am "updates $(date)"
-git push origin master
+git push origin master 或者 git push
 ```
 遇到的问题
 使用git push命令提交更改报错 fatal: unable to access 'http://github.com/xxxxxx/': OpenSSL SSL_read: xxx
