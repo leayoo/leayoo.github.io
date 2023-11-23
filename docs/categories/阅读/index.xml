@@ -1,21 +1,21 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>阅读 - 分类 - kelo&#39;s personal blog</title>
-        <link>https://kelo7.github.io/categories/%E9%98%85%E8%AF%BB/</link>
-        <description>阅读 - 分类 - kelo&#39;s personal blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 10 Jan 2023 12:41:56 &#43;0800</lastBuildDate><atom:link href="https://kelo7.github.io/categories/%E9%98%85%E8%AF%BB/" rel="self" type="application/rss+xml" /><item>
-    <title>斯多葛主义者（一）</title>
-    <link>https://kelo7.github.io/%E6%96%AF%E5%A4%9A%E8%91%9B%E4%B8%BB%E4%B9%89%E4%B8%80/</link>
+        <title>阅读 - 分类 - leayoo&#39;s personal blog</title>
+        <link>https://leayoo.github.io/categories/%E9%98%85%E8%AF%BB/</link>
+        <description>阅读 - 分类 - leayoo&#39;s personal blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 10 Jan 2023 12:41:56 &#43;0800</lastBuildDate><atom:link href="https://leayoo.github.io/categories/%E9%98%85%E8%AF%BB/" rel="self" type="application/rss+xml" /><item>
+    <title>斯多葛主义者 （一）</title>
+    <link>https://leayoo.github.io/%E6%96%AF%E5%A4%9A%E8%91%9B%E4%B8%BB%E4%B9%89%E4%B8%80/</link>
     <pubDate>Tue, 10 Jan 2023 12:41:56 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://kelo7.github.io/%E6%96%AF%E5%A4%9A%E8%91%9B%E4%B8%BB%E4%B9%89%E4%B8%80/</guid>
+    <guid>https://leayoo.github.io/%E6%96%AF%E5%A4%9A%E8%91%9B%E4%B8%BB%E4%B9%89%E4%B8%80/</guid>
     <description><![CDATA[一些斯多葛主义者应该努力追求的状态]]></description>
 </item><item>
     <title>算法之美——过度拟合，不要想太多</title>
-    <link>https://kelo7.github.io/%E7%AE%97%E6%B3%95%E4%B9%8B%E7%BE%8E%E8%BF%87%E5%BA%A6%E6%8B%9F%E5%90%88%E4%B8%8D%E8%A6%81%E6%83%B3%E5%A4%AA%E5%A4%9A/</link>
+    <link>https://leayoo.github.io/%E7%AE%97%E6%B3%95%E4%B9%8B%E7%BE%8E%E8%BF%87%E5%BA%A6%E6%8B%9F%E5%90%88%E4%B8%8D%E8%A6%81%E6%83%B3%E5%A4%AA%E5%A4%9A/</link>
     <pubDate>Mon, 09 Jan 2023 13:12:56 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://kelo7.github.io/%E7%AE%97%E6%B3%95%E4%B9%8B%E7%BE%8E%E8%BF%87%E5%BA%A6%E6%8B%9F%E5%90%88%E4%B8%8D%E8%A6%81%E6%83%B3%E5%A4%AA%E5%A4%9A/</guid>
+    <guid>https://leayoo.github.io/%E7%AE%97%E6%B3%95%E4%B9%8B%E7%BE%8E%E8%BF%87%E5%BA%A6%E6%8B%9F%E5%90%88%E4%B8%8D%E8%A6%81%E6%83%B3%E5%A4%AA%E5%A4%9A/</guid>
     <description><![CDATA[一篇《算法之美》「过度拟合，不要想太多」章节的笔记]]></description>
 </item></channel>
 </rss>

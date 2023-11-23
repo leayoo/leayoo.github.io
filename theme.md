@@ -3,7 +3,7 @@ pure
 
 config.yml
 
-baseURL: https://kelo7.github.io/
+baseURL: https://leayoo.github.io/
 # languageCode = "en-us"
 # title = "Hello World"
 # theme = "hugo-theme-pure"
@@ -217,7 +217,7 @@ hugo-theme-stack
 
 config.yaml
 
-baseurl: https://kelo7.github.io/
+baseurl: https://leayoo.github.io/
 languageCode: en-us
 theme: hugo-theme-stack
 paginate: 5

@@ -1,4 +1,4 @@
-baseURL = "https://kelo7.github.io/"
+baseURL = "https://leayoo.github.io/"
 # [en, zh-cn, fr, ...] 设置默认的语言
 defaultContentLanguage = "zh-cn"
 # 网站语言, 仅在这里 CN 大写
@@ -6,7 +6,7 @@ languageCode = "zh-CN"
 # 是否包括中日韩文字
 hasCJKLanguage = true
 # 网站标题
-title = "kelo's personal blog"
+title = "leayoo's personal blog"
 
 # 更改使用 Hugo 构建网站时使用的默认主题
 theme = "LoveIt"
@@ -107,7 +107,7 @@ theme = "LoveIt"
       # LOGO 的 URL
       logo = ""
       # 标题名称
-      name = "Kelo's Blog"
+      name = "Leayoo's Blog"
       # 你可以在名称 (允许 HTML 格式) 之前添加其他信息, 例如图标
       pre = ""
       # 你可以在名称 (允许 HTML 格式) 之后添加其他信息, 例如图标
@@ -161,7 +161,7 @@ theme = "LoveIt"
       # Gravatar 邮箱，用于优先在主页显示的头像
       gravatarEmail = ""
       # 主页显示头像的 URL
-      avatarURL = "https://pic1.zhimg.com/v2-3d8bbeb22d8a4db0ce000b9dc0fc783f_r.jpg"
+      avatarURL = "https://raw.githubusercontent.com/leayoo/PictureOfNotebook/master/20231123201125.png"
       #  主页显示的网站标题 (支持 HTML 格式)
       title = ""
       # 主页显示的网站副标题
@@ -169,7 +169,7 @@ theme = "LoveIt"
       # 是否为副标题显示打字机动画
       typeit = true
       # 是否显示社交账号
-      social = true
+      social = false
       #  免责声明 (支持 HTML 格式)
       disclaimer = ""
     # 主页文章列表
@@ -313,11 +313,11 @@ theme = "LoveIt"
       fullscreen = true
     #  文章页面的分享信息设置
     [params.page.share]
-      enable = true
-      Twitter = true
-      Facebook = true
+      enable = false
+      Twitter = false
+      Facebook = false
       Linkedin = false
-      Whatsapp = true
+      Whatsapp = false
       Pinterest = false
       Tumblr = false
       HackerNews = false
@@ -325,19 +325,19 @@ theme = "LoveIt"
       VK = false
       Buffer = false
       Xing = false
-      Line = true
+      Line = false
       Instapaper = false
       Pocket = false
       Digg = false
       Stumbleupon = false
       Flipboard = false
-      Weibo = true
+      Weibo = false
       Renren = false
-      Myspace = true
-      Blogger = true
+      Myspace = false
+      Blogger = false
       Baidu = false
       Odnoklassniki = false
-      Evernote = true
+      Evernote = false
       Skype = false
       Trello = false
       Mix = false
@@ -525,7 +525,7 @@ theme = "LoveIt"
 
 # 作者配置
 [author]
-  name = "kelo"
+  name = "leayoo"
   email = ""
   link = ""
 

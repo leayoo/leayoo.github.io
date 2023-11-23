@@ -1,65 +1,65 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>kelo&#39;s personal blog</title>
-        <link>https://kelo7.github.io/</link>
+        <title>leayoo&#39;s personal blog</title>
+        <link>https://leayoo.github.io/</link>
         <description>a personal blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 10 Jan 2023 12:41:56 &#43;0800</lastBuildDate>
-            <atom:link href="https://kelo7.github.io/index.xml" rel="self" type="application/rss+xml" />
+            <atom:link href="https://leayoo.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
-    <title>斯多葛主义者（一）</title>
-    <link>https://kelo7.github.io/%E6%96%AF%E5%A4%9A%E8%91%9B%E4%B8%BB%E4%B9%89%E4%B8%80/</link>
+    <title>斯多葛主义者 （一）</title>
+    <link>https://leayoo.github.io/%E6%96%AF%E5%A4%9A%E8%91%9B%E4%B8%BB%E4%B9%89%E4%B8%80/</link>
     <pubDate>Tue, 10 Jan 2023 12:41:56 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://kelo7.github.io/%E6%96%AF%E5%A4%9A%E8%91%9B%E4%B8%BB%E4%B9%89%E4%B8%80/</guid>
+    <guid>https://leayoo.github.io/%E6%96%AF%E5%A4%9A%E8%91%9B%E4%B8%BB%E4%B9%89%E4%B8%80/</guid>
     <description><![CDATA[一些斯多葛主义者应该努力追求的状态]]></description>
 </item><item>
     <title>算法之美——过度拟合，不要想太多</title>
-    <link>https://kelo7.github.io/%E7%AE%97%E6%B3%95%E4%B9%8B%E7%BE%8E%E8%BF%87%E5%BA%A6%E6%8B%9F%E5%90%88%E4%B8%8D%E8%A6%81%E6%83%B3%E5%A4%AA%E5%A4%9A/</link>
+    <link>https://leayoo.github.io/%E7%AE%97%E6%B3%95%E4%B9%8B%E7%BE%8E%E8%BF%87%E5%BA%A6%E6%8B%9F%E5%90%88%E4%B8%8D%E8%A6%81%E6%83%B3%E5%A4%AA%E5%A4%9A/</link>
     <pubDate>Mon, 09 Jan 2023 13:12:56 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://kelo7.github.io/%E7%AE%97%E6%B3%95%E4%B9%8B%E7%BE%8E%E8%BF%87%E5%BA%A6%E6%8B%9F%E5%90%88%E4%B8%8D%E8%A6%81%E6%83%B3%E5%A4%AA%E5%A4%9A/</guid>
+    <guid>https://leayoo.github.io/%E7%AE%97%E6%B3%95%E4%B9%8B%E7%BE%8E%E8%BF%87%E5%BA%A6%E6%8B%9F%E5%90%88%E4%B8%8D%E8%A6%81%E6%83%B3%E5%A4%AA%E5%A4%9A/</guid>
     <description><![CDATA[一篇《算法之美》「过度拟合，不要想太多」章节的笔记]]></description>
 </item><item>
     <title>双指针技巧总结</title>
-    <link>https://kelo7.github.io/%E5%8F%8C%E6%8C%87%E9%92%88%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93/</link>
+    <link>https://leayoo.github.io/%E5%8F%8C%E6%8C%87%E9%92%88%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93/</link>
     <pubDate>Sun, 02 Jan 2022 23:12:42 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://kelo7.github.io/%E5%8F%8C%E6%8C%87%E9%92%88%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93/</guid>
+    <guid>https://leayoo.github.io/%E5%8F%8C%E6%8C%87%E9%92%88%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93/</guid>
     <description><![CDATA[双指针技巧总结, 快慢指针与左右指针的思路]]></description>
 </item><item>
     <title>Comparator与lambda表达式</title>
-    <link>https://kelo7.github.io/comparator%E4%B8%8Elambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/</link>
+    <link>https://leayoo.github.io/comparator%E4%B8%8Elambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/</link>
     <pubDate>Fri, 31 Dec 2021 18:45:28 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://kelo7.github.io/comparator%E4%B8%8Elambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/</guid>
+    <guid>https://leayoo.github.io/comparator%E4%B8%8Elambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/</guid>
     <description><![CDATA[Comparator与lambda表达式 从概念到示例]]></description>
 </item><item>
     <title>拖延处理技巧汇编</title>
-    <link>https://kelo7.github.io/%E6%8B%96%E5%BB%B6%E5%A4%84%E7%90%86%E6%8A%80%E5%B7%A7%E6%B1%87%E7%BC%96/</link>
+    <link>https://leayoo.github.io/%E6%8B%96%E5%BB%B6%E5%A4%84%E7%90%86%E6%8A%80%E5%B7%A7%E6%B1%87%E7%BC%96/</link>
     <pubDate>Tue, 28 Dec 2021 16:44:02 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://kelo7.github.io/%E6%8B%96%E5%BB%B6%E5%A4%84%E7%90%86%E6%8A%80%E5%B7%A7%E6%B1%87%E7%BC%96/</guid>
+    <guid>https://leayoo.github.io/%E6%8B%96%E5%BB%B6%E5%A4%84%E7%90%86%E6%8A%80%E5%B7%A7%E6%B1%87%E7%BC%96/</guid>
     <description><![CDATA[《拖延心理学》中关于拖延处理技巧的整理]]></description>
 </item><item>
     <title>明确目标与可行性的计划</title>
-    <link>https://kelo7.github.io/%E6%98%8E%E7%A1%AE%E7%9B%AE%E6%A0%87%E4%B8%8E%E5%8F%AF%E8%A1%8C%E6%80%A7%E7%9A%84%E8%AE%A1%E5%88%92/</link>
+    <link>https://leayoo.github.io/%E6%98%8E%E7%A1%AE%E7%9B%AE%E6%A0%87%E4%B8%8E%E5%8F%AF%E8%A1%8C%E6%80%A7%E7%9A%84%E8%AE%A1%E5%88%92/</link>
     <pubDate>Tue, 28 Dec 2021 15:04:10 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://kelo7.github.io/%E6%98%8E%E7%A1%AE%E7%9B%AE%E6%A0%87%E4%B8%8E%E5%8F%AF%E8%A1%8C%E6%80%A7%E7%9A%84%E8%AE%A1%E5%88%92/</guid>
+    <guid>https://leayoo.github.io/%E6%98%8E%E7%A1%AE%E7%9B%AE%E6%A0%87%E4%B8%8E%E5%8F%AF%E8%A1%8C%E6%80%A7%E7%9A%84%E8%AE%A1%E5%88%92/</guid>
     <description><![CDATA[拖延vs征服之战（一）——目标与计划]]></description>
 </item><item>
     <title>使用hugo</title>
-    <link>https://kelo7.github.io/%E4%BD%BF%E7%94%A8hugo/</link>
+    <link>https://leayoo.github.io/%E4%BD%BF%E7%94%A8hugo/</link>
     <pubDate>Tue, 21 Dec 2021 11:47:47 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://kelo7.github.io/%E4%BD%BF%E7%94%A8hugo/</guid>
+    <guid>https://leayoo.github.io/%E4%BD%BF%E7%94%A8hugo/</guid>
     <description><![CDATA[hugo使用 不经常用hugo，导致每次使用都要重新翻找教程，干脆把要常用的操作写下来备份]]></description>
 </item><item>
     <title>拖延怪圈</title>
-    <link>https://kelo7.github.io/%E6%8B%96%E5%BB%B6%E6%80%AA%E5%9C%88/</link>
+    <link>https://leayoo.github.io/%E6%8B%96%E5%BB%B6%E6%80%AA%E5%9C%88/</link>
     <pubDate>Tue, 21 Dec 2021 11:01:56 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://kelo7.github.io/%E6%8B%96%E5%BB%B6%E6%80%AA%E5%9C%88/</guid>
+    <guid>https://leayoo.github.io/%E6%8B%96%E5%BB%B6%E6%80%AA%E5%9C%88/</guid>
     <description><![CDATA[一篇关于拖延怪圈，拖延行为中的共性（包括思绪、情感、行为波动）的文章]]></description>
 </item></channel>
 </rss>
