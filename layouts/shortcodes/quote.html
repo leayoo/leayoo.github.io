@@ -1,6 +1,6 @@
-<!-- 文件位置：~/layouts/shortcodes/quote-center.html -->
+<!-- 文件位置：~/layouts/shortcodes/quote.html -->
 
-<blockquote class="quote-center">
+<blockquote class="quote{{ range .Params }} {{ . }}{{ end }}">
     {{- $content := .Inner | markdownify -}}
     {{- if not (strings.HasPrefix $content "<p>") }}
         {{ printf `

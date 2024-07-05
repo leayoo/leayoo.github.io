@@ -241,6 +241,18 @@ uglyURLs = false
 
 [params]
     ######################################
+    # 定制自定义组件
+
+    # 自定义文章时效性提醒
+
+    # 是否开启
+    enableExpiredTip = true
+    # 是否显示（全局设置）
+    displayPostExpiredTip = false
+    # 说明：文章的 Front Matter 中的 
+    # `displayExpiredTip` 的优先级高于此处
+
+    ######################################
     # 顶栏
 
     # 是否开启
@@ -1483,3 +1495,7 @@ uglyURLs = false
         valine = "/npm/valine@1.4.14/dist/Valine.min.js"
         busuanzi = "https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"
         utterances = "https://utteranc.es/client.js"
+
+
+
+

@@ -1,0 +1,133 @@
+/* // 文件位置：~/assets/scss/custom/_custom.scss */
+
+.github {
+    border: 1px solid var(--color-contrast-low);
+    border-radius: 3px;
+    margin: 0 auto;
+    margin-bottom: 1em;
+    padding: 1em;
+    .github-icon {
+        width: 1.2em;
+        height: 1.2em;
+        margin-right: 0.5em;
+        margin-bottom: 0.2em;
+        fill: var(--color-contrast-high);
+        transition: all .5s;
+    }
+    .name {
+        font-weight: bold;
+        color: var(--color-primary);
+        text-decoration: none;
+    }
+    .description {
+        margin-top: 0.5em;
+        margin-bottom: 1em;
+        color: var(--color-contrast-high);
+        text-align: justify;
+        font-size: 90%;
+        transition: all .5s;
+    }
+    .language-color {
+        position: relative;
+        top: 1px;
+        display: inline-block;
+        width: 0.75em;
+        height: 0.75em;
+        border-radius: 50%;
+    }
+    .language-name {
+        color: var(--color-contrast-high);
+        font-size: 90%;
+        margin-left: 0.5em;
+        transition: all .5s;
+    }
+}
+
+blockquote.quote {
+    position: relative;
+    margin: 2em auto;
+    padding-left: 3em;
+    border: none;
+
+    &::before {
+        position: absolute;
+        left: 0;
+        content: '“';
+        color: var(--color-contrast-low);
+        font-family: 'JetBrains Mono', 'Amstelvar', 'Noto Serif SC', serif;
+        font-size: 3em;
+        font-weight: bold;
+        line-height: 1;
+    }
+
+    &.poetry {
+        display: table;
+        padding: 0;
+
+        &::before {
+            left: -1em;
+        }
+
+        p:last-child {
+            margin: 0;
+        }
+    }
+
+    &.en {
+        p {
+            line-height: 1.618;
+            text-align: left;
+            hyphens: auto;
+            -webkit-hyphens: auto;
+            -moz-hyphens: auto;
+        }
+    }
+}
+
+@media (max-width: $maxWidth) {
+    blockquote.quote {
+        &.poetry {
+            padding-left: 3em;
+
+            &::before {
+                left: 0;
+            }
+        }
+    }
+}
+
+/* // 文件位置：~/assets/scss/custom/_custom.scss */
+
+blockquote.quote-center {
+    position: relative;
+    border-left: none;
+    padding-left: 0;
+    border-top: 1px solid var(--color-contrast-lower);
+    border-bottom: 1px solid var(--color-contrast-lower);
+
+    p {
+        text-align: center !important;
+        margin-top: 1.5em;
+        margin-bottom: 1.5em;
+    }
+
+    &::before {
+        position: absolute;
+        left: 0;
+        content: '“';
+        color: var(--color-contrast-low);
+        font-size: 3em;
+        font-weight: bold;
+        margin-top: -0.42em;
+    }
+
+    &::after {
+        position: absolute;
+        right: 0;
+        content: '”';
+        color: var(--color-contrast-low);
+        font-size: 3em;
+        font-weight: bold;
+        margin-top: -0.7em;
+    }
+}
