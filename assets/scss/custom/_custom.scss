@@ -131,3 +131,18 @@ blockquote.quote-center {
         margin-top: -0.7em;
     }
 }
+
+/* css */
+.spoiler {
+    filter: blur(4px);
+    display: inline;
+
+    &:hover {
+        filter: blur(0);
+    }
+}
+
+/* css */
+.empty {
+    display: inline;
+}

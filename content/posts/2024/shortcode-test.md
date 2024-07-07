@@ -30,3 +30,10 @@ To see a world in a grain of sand. And a heaven in a wild flower. Hold infinity 
 {{< quote-center >}}
 十里青山远，潮平路带沙<br>数声啼鸟怨年华<br>又是凄凉时候，在天涯<br>白露收残月，清风散晓霞<br>绿杨堤畔问荷花<br>记得年时沽酒，那人家
 {{< /quote-center >}}
+
+以下是剧透，请谨慎擦除观看
+<div class="spoiler">
+1 xxx<br>
+2 aaa<br>
+b ccc<br>
+</div>
